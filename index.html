@@ -51,11 +51,11 @@
 				</header>
 				<section class="lang px-5 py-5">
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label :class="['btn btn-secondary', { 'active': lang === 'spanish' }]">
-							<input type="radio" v-model="lang" value="spanish" id="spanish"> Español
+						<label :class="['btn btn-secondary', { 'active': currentLanguague === 'es' }]">
+							<input type="radio" v-model="$i18n.locale" value="es" id="spanish"> Español
 						</label>
-						<label :class="['btn btn-secondary', { 'active': lang === 'english' }]">
-							<input type="radio" v-model="lang" value="english" id="english"> English
+						<label :class="['btn btn-secondary', { 'active': currentLanguague === 'en' }]">
+							<input type="radio" v-model="$i18n.locale" value="en" id="english"> English
 						</label>
 					</div>
 				</section>
@@ -72,17 +72,20 @@
 								<h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">{{ $t('workExperience.title') }}</h2>
 								<div class="resume-section-content">
 									<div class="resume-timeline position-relative">
-										<article class="resume-timeline-item position-relative pb-5">
-											
+
+
+										<article v-for="(job, index) in jobsList" :key="index" class="resume-timeline-item position-relative pb-5">
 											<div class="resume-timeline-item-header mb-2">
 												<div class="d-flex flex-column flex-md-row">
-													<h3 class="resume-position-title font-weight-bold mb-1">Lead Developer</h3>
-													<div class="resume-company-name ml-auto">Startup Hub</div>
+													<h3 class="resume-position-title font-weight-bold mb-1">{{ $t(`workExperience.jobs[${index}].position`) }}</h3>
+													<div class="resume-company-name ml-auto">{{ $t(`workExperience.jobs[${index}].company`) }}</div>
 												</div><!--//row-->
-												<div class="resume-position-time">2018 - Present</div>
+												<div class="resume-position-time">{{ $t(`workExperience.jobs[${index}].time`) }}</div>
 											</div><!--//resume-timeline-item-header-->
 											<div class="resume-timeline-item-desc">
-												<p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Donec pede justo, fringilla vel.</p>
+												<p>{{ $t(`workExperience.jobs[${index}].description`) }}</p>
+
+											<template v-if="jobsList[index].achievements.length">
 												<h4 class="resume-timeline-item-desc-heading font-weight-bold">Achievements:</h4>
 												<p>Praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
 												<ul>
@@ -91,20 +94,22 @@
 													<li>Blanditiis praesentium voluptatum deleniti atque corrupti.</li>
 													<li>Maecenas tempus tellus eget.</li>
 												</ul>
+											</template>
+
+											<template v-if="jobsList[index].technologies.length">
 												<h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 												<ul class="list-inline">
-													<li class="list-inline-item"><span class="badge badge-primary badge-pill">Angular</span></li>
-													<li class="list-inline-item"><span class="badge badge-primary badge-pill">Python</span></li>
-													<li class="list-inline-item"><span class="badge badge-primary badge-pill">jQuery</span></li>
-													<li class="list-inline-item"><span class="badge badge-primary badge-pill">Webpack</span></li>
-													<li class="list-inline-item"><span class="badge badge-primary badge-pill">HTML/SASS</span></li>
-													<li class="list-inline-item"><span class="badge badge-primary badge-pill">PostgresSQL</span></li>
+													<li v-for="tech in jobsList[index].technologies" class="list-inline-item"><span class="badge badge-primary badge-pill">{{ tech }}</span></li>
 												</ul>
+											</template>
 											</div><!--//resume-timeline-item-desc-->
-											
 										</article><!--//resume-timeline-item-->
 										
-										<article class="resume-timeline-item position-relative pb-5">
+
+
+
+
+										<article class="d-none resume-timeline-item position-relative pb-5">
 											
 											<div class="resume-timeline-item-header mb-2">
 												<div class="d-flex flex-column flex-md-row">
@@ -130,7 +135,7 @@
 											
 										</article><!--//resume-timeline-item-->
 										
-										<article class="resume-timeline-item position-relative pb-5">
+										<article class="d-none resume-timeline-item position-relative pb-5">
 											
 											<div class="resume-timeline-item-header mb-2">
 												<div class="d-flex flex-column flex-md-row">
@@ -154,7 +159,7 @@
 											
 										</article><!--//resume-timeline-item-->
 										
-										<article class="resume-timeline-item position-relative">
+										<article class="d-none resume-timeline-item position-relative">
 											
 											<div class="resume-timeline-item-header mb-2">
 												<div class="d-flex flex-column flex-md-row">
@@ -177,6 +182,7 @@
 										</article><!--//resume-timeline-item-->
 										
 										
+
 									</div><!--//resume-timeline-->
 									
 									

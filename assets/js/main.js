@@ -7,6 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       workExperience: {
         title: 'Work Experience',
+        jobs: [
+          {
+            position: 'Front End Web Developer',
+            company: 'SKY Airline S.A.',
+            time: 'August 2019 - Present',
+            description: 'Implementations on the current website, collaborating and participating in the Digital Channels team supporting as a developer in new projects, ensuring compliance with the best practices of the website in the SPA (Single Page Applications) and performance of the site load.',
+            technologies: ['HTML/SASS', 'Javascript ES6', 'Vue', 'Webpack', 'Node.js', 'Express'],
+            achievements: []
+          },
+          {
+            position: 'Front End Web Developer',
+            company: 'Modyo S.A.',
+            time: 'November 2017 - August 2019',
+            description: 'Development and Maintenance of sites, applications, and web content on the ModyoDX platform. User interface design and user experience improvements. Website optimization, usability and cross-browser compatibility.',
+            technologies: ['HTML/SASS', 'Javascript ES5', 'Vue', 'jQuery', 'Bootstrap'],
+            achievements: []
+          }
+        ]
       }
     },
     es: {
@@ -16,6 +34,24 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       workExperience: {
         title: 'Experiencia Laboral',
+        jobs: [
+          {
+            position: 'Front End Web Developer',
+            company: 'SKY Airline S.A.',
+            time: 'August 2019 - Present',
+            description: 'Implementations on the current website, collaborating and participating in the Digital Channels team supporting as a developer in new projects, ensuring compliance with the best practices of the website in the SPA (Single Page Applications) and performance of the site load.',
+            technologies: ['HTML/SASS', 'Javascript ES6', 'Vue', 'Webpack', 'Node.js', 'Express', 'Git', 'CI/CD'],
+            achievements: []
+          },
+          {
+            position: 'Front End Web Developer',
+            company: 'Modyo S.A.',
+            time: 'November 2017 - August 2019',
+            description: 'Development and Maintenance of sites, applications, and web content on the ModyoDX platform. User interface design and user experience improvements. Website optimization, usability and cross-browser compatibility.',
+            technologies: ['HTML/SASS', 'Javascript ES5', 'Vue', 'jQuery', 'Bootstrap', 'Git'],
+            achievements: []
+          }
+        ]
       }
     }
   }
@@ -24,24 +60,33 @@ document.addEventListener('DOMContentLoaded', () => {
     messages, // set locale messages
   });
 
-  const APP = new Vue({
+  const resumeApp = new Vue({
+    name: 'ResumeApp',
     el: '#app',
     data: {
-      lang: 'english',
-      english: [
-        {
-          careerSummary: 'Career Summary'
-        }
-      ],
-      spanish: [
-        {
-          careerSummary: 'Perfil Profesional'
-        }
-      ]
+      // jobs: [
+      //   {
+      //     position: 'Front End Web Developer',
+      //     company: 'SKY Airline S.A.',
+      //     time: 'August 2019 - Present',
+      //     description: 'Implementations on the current website, collaborating and participating in the Digital Channels team supporting as a developer in new projects, ensuring compliance with the best practices of the website in the SPA (Single Page Applications) and performance of the site load.',
+      //     technologies: ['HTML/SASS', 'Javascript ES6', 'Vue', 'Webpack', 'Node.js', 'Express']
+      //   },
+      //   {
+      //     position: 'Front End Web Developer',
+      //     company: 'Modyo S.A.',
+      //     time: 'November 2017 - August 2019',
+      //     description: 'Development and Maintenance of sites, applications, and web content on the ModyoDX platform. User interface design and user experience improvements. Website optimization, usability and cross-browser compatibility.',
+      //     technologies: ['HTML/SASS', 'Javascript ES5', 'Vue', 'jQuery', 'Bootstrap']
+      //   }
+      // ]
     },
     computed: {
-      langSelected() {
-        return this.lang;
+      currentLanguague() {
+        return this.$i18n.locale;
+      },
+      jobsList() {
+        return this.$i18n.messages[this.currentLanguague].workExperience.jobs;
       }
     },
     i18n,
