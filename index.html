@@ -97,7 +97,7 @@
 											</template>
 
 											<template v-if="jobsList[index].technologies.length">
-												<h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
+												<h4 class="resume-timeline-item-desc-heading font-weight-bold">{{ $t('workExperience.technologiesUsed')}}</h4>
 												<ul class="list-inline">
 													<li v-for="tech in jobsList[index].technologies" class="list-inline-item"><span class="badge badge-primary badge-pill">{{ tech }}</span></li>
 												</ul>
@@ -273,23 +273,15 @@
 									</div><!--//resume-skill-item-->
 									
 									<div class="resume-skill-item">
-										<h4 class="resume-skills-cat font-weight-bold">Others</h4>
+										<h4 class="resume-skills-cat font-weight-bold">{{ $t('others.title') }}</h4>
 										<ul class="list-inline">
-											<li class="list-inline-item"><span class="badge badge-light">DevOps</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">Code Review</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">Git</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">Unit Testing</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">Wireframing</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">Sketch</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">Balsamiq</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">WordPress</span></li>
-											<li class="list-inline-item"><span class="badge badge-light">Shopify</span></li>
+											<li v-for="(skill, i) in skillsList" class="list-inline-item"><span class="badge badge-light">{{ $t(`others.list[${i}]`) }}</span></li>
 										</ul>
 									</div><!--//resume-skill-item-->
 								</div><!--resume-section-content-->
 							</section><!--//skills-section-->
 							<section class="resume-section education-section mb-5">
-								<h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Education</h2>
+								<h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">{{ $t('education.title') }}</h2>
 								<div class="resume-section-content">
 									<ul class="list-unstyled">
 										<li class="mb-2">
