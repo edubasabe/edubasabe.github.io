@@ -31,6 +31,10 @@ $theme-colors: (
 
 
 /*************************** Pillar Styles ****************************/
+[v-cloak] {
+  display: none;
+}
+
 body {
     font-family: 'Roboto', sans-serif;  
     background: $theme-bg-light;

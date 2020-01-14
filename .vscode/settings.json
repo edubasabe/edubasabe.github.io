@@ -1,0 +1,17 @@
+{
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/assets/css"
+    },
+    {
+      "format": "compressed",
+      "extensionName": ".min.css",
+      "savePath": "/assets/css"
+    }
+  ],
+  "liveSassCompile.settings.includeItems": [
+    "/assets/scss/pillar-1.scss",
+  ]
+}
