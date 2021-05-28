@@ -1,3 +1,2 @@
-# edubasabe.github.io
+# Hi! this is my personal website
 
-My personal GitHub Website
