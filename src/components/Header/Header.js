@@ -4,7 +4,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -23,6 +22,10 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 
+import NAV_ITEMS from '../../constants/navItems';
+
+import DesktopNav from './DesktopNav/DesktopNav';
+
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
   const navbarBg = useColorModeValue('white', 'gray.800');
@@ -30,21 +33,22 @@ export default function WithSubnavigation() {
   const navbarBorderColor = useColorModeValue('gray.200', 'gray.900');
   const navItemColor = useColorModeValue('gray.800', 'white');
   return (
-    <Box>
+    <Box borderStyle={'solid'} borderColor={navbarBorderColor}>
       <Flex
         bg={navbarBg}
         color={navbarColor}
         minH={'60px'}
+        maxW="container.xl"
+        margin="0 auto"
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={navbarBorderColor}
         align={'center'}>
         <Flex
           flex={{ base: 1, md: 'auto' }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
+          mr="auto"
+          display={{ base: 'inline-flex', md: 'none' }}>
           <IconButton
             onClick={onToggle}
             icon={
@@ -54,11 +58,12 @@ export default function WithSubnavigation() {
             aria-label={'Toggle Navigation'}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <Flex flex={{ base: 'center' }} justify={{ base: 'center', md: 'center' }} align="center"> 
           <Text
             textAlign={{ base: 'center', md: 'left' }}
             fontWeight="bold"
             fontFamily={'heading'}
+            fontSize={["xl"]}
             color={navItemColor}>
             @ebasabe
           </Text>
@@ -102,86 +107,6 @@ export default function WithSubnavigation() {
     </Box>
   );
 }
-const DesktopNav = () => {
-  const popoverTextColor = useColorModeValue('gray.600', 'gray.200');
-  const popoverTextColorHover = {
-    textDecoration: 'none',
-    color: useColorModeValue('gray.800', 'white'),
-  };
-
-  const popoverBg = useColorModeValue('white', 'gray.800');
-  return (
-    <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={popoverTextColor}
-                _hover={popoverTextColorHover}>
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverBg}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}>
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))}
-    </Stack>
-  );
-};
-
-const DesktopSubNav = ({ label, href, subLabel }) => {
-  return (
-    <Link
-      href={href}
-      role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-      <Stack direction={'row'} align={'center'}>
-        <Box>
-          <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}>
-            {label}
-          </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
-    </Link>
-  );
-};
 
 const MobileNav = () => {
   return (
@@ -245,17 +170,3 @@ const MobileNavItem = ({ label, children, href }) => {
     </Stack>
   );
 };
-
-
-const NAV_ITEMS = [
-  {
-    label: 'About',
-  },
-  {
-    label: 'Work',
-  },
-  {
-    label: 'Contact',
-    href: '#',
-  },
-];

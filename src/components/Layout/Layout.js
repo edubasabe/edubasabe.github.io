@@ -10,7 +10,7 @@ export default function Layout(props) {
   return (
     <>
       <Header />
-      <Flex as="main" minHeight="80vh" backgroundColor={layoutBgColor}>
+      <Flex as="main" minHeight="calc(100vh - 124px)" backgroundColor={layoutBgColor}>
         {props.children}
       </Flex>
       <Footer />
