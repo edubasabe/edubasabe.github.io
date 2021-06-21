@@ -1,4 +1,4 @@
-import { Container, Heading, Flex } from '@chakra-ui/layout'
+import { Container, Heading } from '@chakra-ui/layout'
 import React from 'react'
 import Layout from '../components/Layout/Layout'
 import PageHeading from '../components/UI/PageHeading/PageHeading'

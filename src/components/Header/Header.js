@@ -8,9 +8,6 @@ import {
   Collapse,
   Icon,
   Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -19,7 +16,6 @@ import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
-  ChevronRightIcon,
 } from '@chakra-ui/icons';
 
 import NAV_ITEMS from '../../constants/navItems';
