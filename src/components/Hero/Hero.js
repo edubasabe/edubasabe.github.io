@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { navigate } from 'gatsby-link';
 import {
   Button,
   Flex,
@@ -11,6 +11,9 @@ import {
 } from '@chakra-ui/react';
 
 export default function SplitScreen() {
+  function goContactPage() {
+    navigate('/contact');
+  }
   return (
     <Stack minH={'30vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
@@ -42,12 +45,13 @@ export default function SplitScreen() {
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
+              onClick={goContactPage}
               bg={'blue.400'}
               color={'white'}
               _hover={{
                 bg: 'blue.500',
               }}>
-              Create Project
+              Contact me
             </Button>
             <Button href="/works">Latest Works</Button>
           </Stack>
