@@ -1,18 +1,42 @@
 import React from "react";
 import {
   Heading,
-  Avatar,
   Box,
   Center,
   Image,
-  Flex,
   Text,
   Stack,
-  Button,
   useColorModeValue,
 } from "@chakra-ui/react";
 
-export default function Card({ title, link }) {
+import { css } from "@emotion/react";
+import { theme } from "@chakra-ui/react";
+
+export default function Card({ title, link, image, height }) {
+  const { colors } = theme;
+  const cardStyles = css`
+    background-color: ${colors.black};
+    transition: all 400ms ease;
+
+    .card__text-container {
+      opacity: 0;
+    }
+
+    .card__image,
+    .card__text-container {
+      transition: all 400ms ease;
+    }
+
+    &:hover {
+      cursor: pointer;
+      .card__image {
+        opacity: 0.3;
+      }
+      .card__text-container {
+        opacity: 1;
+      }
+    }
+  `;
   return (
     <Center py={6}>
       <Box
@@ -23,17 +47,23 @@ export default function Card({ title, link }) {
         rounded={"md"}
         overflow={"hidden"}
         position="relative"
+        css={cardStyles}
       >
         <Image
-          h={"120px"}
+          h={height}
           w={"full"}
-          src={
-            "https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-          }
+          src={image}
           objectFit={"cover"}
+          className="card__image"
         />
 
-        <Box p={2} position="absolute" bottom="0" w="full">
+        <Box
+          p={2}
+          position="absolute"
+          bottom="0"
+          w="full"
+          className="card__text-container"
+        >
           <Stack spacing={0} align={"left"} mb={2}>
             <Heading
               fontSize={"lg"}
@@ -44,7 +74,7 @@ export default function Card({ title, link }) {
             >
               {title}
             </Heading>
-            <Text color={"gray.500"}>{link}</Text>
+            <Text color={"whiteAlpha.800"}>{link}</Text>
           </Stack>
         </Box>
       </Box>

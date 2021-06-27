@@ -4,7 +4,7 @@ import Layout from "../components/Layout/Layout";
 import PageHeading from "../components/UI/PageHeading/PageHeading";
 import { graphql, useStaticQuery } from "gatsby";
 import Card from "../components/UI/Card";
-import { HStack } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 
 const Works = () => {
   const {
@@ -17,6 +17,11 @@ const Works = () => {
             id
             name
             url
+            cover {
+              file {
+                url
+              }
+            }
           }
         }
       }
@@ -30,13 +35,18 @@ const Works = () => {
         <PageHeading>
           <Heading>Works</Heading>
         </PageHeading>
-        <HStack>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }}>
           {works.map((work) => (
             <Fragment key={work.node.id}>
-              <Card title={work.node.name} link={work.node.url} />
+              <Card
+                title={work.node.name}
+                link={work.node.url}
+                image={work.node.cover?.file.url}
+                height={"220px"}
+              />
             </Fragment>
           ))}
-        </HStack>
+        </SimpleGrid>
       </Container>
     </Layout>
   );
