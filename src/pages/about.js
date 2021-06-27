@@ -13,22 +13,19 @@ import React, { Fragment } from "react";
 import Layout from "../components/Layout/Layout";
 import SKILLS from "../constants/skills";
 import AboutImage from "../images/about-me.jpg";
-const Works = () => {
+
+const About = () => {
   const categories = Object.keys(SKILLS);
+
   return (
     <Layout>
       <Container maxW="container.xl" pt="4">
-        <Flex padding={{ base: 4, md: 10 }} justify="space-between">
+        <Flex
+          padding={{ base: 4, md: 10 }}
+          justify="space-between"
+          alignItems="flex-start"
+        >
           <Box maxW="2xl">
-            <Heading
-              as="h6"
-              fontSize="sm"
-              textTransform="uppercase"
-              letterSpacing="wide"
-              color="blue.400"
-            >
-              About
-            </Heading>
             <Heading as="h3" mb="2">
               Hi!{" "}
               <span role="img" aria-label="Hand shake">
@@ -103,4 +100,4 @@ const Works = () => {
   );
 };
 
-export default Works;
+export default About;
