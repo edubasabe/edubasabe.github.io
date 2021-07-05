@@ -24,6 +24,7 @@ const About = () => {
           padding={{ base: 4, md: 10 }}
           justify="space-between"
           alignItems="flex-start"
+          direction={{ base: "column-reverse", md: "row" }}
         >
           <Box maxW="2xl">
             <Heading as="h3" mb="2">
@@ -86,7 +87,10 @@ const About = () => {
               </SimpleGrid>
             </Box>
           </Box>
-          <Box boxSize="sm">
+          <Box
+            display={{ base: "none", lg: "block" }}
+            boxSize={{ base: "100%" }}
+          >
             <Image
               src={AboutImage}
               alt="About me"

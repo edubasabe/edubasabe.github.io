@@ -61,7 +61,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex
-          flex={{ base: "center" }}
+          flex={{ base: 8, md: "center" }}
           justify={{ base: "center", md: "center" }}
           align="center"
         >
@@ -78,7 +78,7 @@ export default function WithSubnavigation() {
             <Dot />
           </Link>
 
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex display={{ base: "none", md: "flex" }} flex={{ md: 1 }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>

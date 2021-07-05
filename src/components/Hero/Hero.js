@@ -11,6 +11,8 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
+import Typed from "react-typed";
+
 export default function SplitScreen() {
   function goContactPage() {
     navigate("/contact");
@@ -20,7 +22,12 @@ export default function SplitScreen() {
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={6} w={"full"} maxW={"lg"}>
           <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
-            <Text
+            <Typed
+              strings={["FrontEnd Developer", "UI Designer"]}
+              typeSpeed={50}
+              loop={true}
+            />
+            {/* <Text
               as={"span"}
               position={"relative"}
               _after={{
@@ -35,11 +42,11 @@ export default function SplitScreen() {
               }}
             >
               FrontEnd Engineer
-            </Text>
+            </Text> */}
             <br />{" "}
-            <Text color={"blue.400"} as={"span"}>
+            {/* <Text color={"blue.400"} as={"span"}>
               Senior
-            </Text>{" "}
+            </Text>{" "} */}
           </Heading>
           <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
             More than 4 years of experience building digital products for very
