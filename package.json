@@ -20,6 +20,7 @@
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "axios": "^0.21.1",
     "framer-motion": "^4.1.17",
     "gatsby": "^3.4.1",
     "gatsby-plugin-image": "^1.6.0",
@@ -32,6 +33,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.12.2",
     "react-icons": "^4.2.0",
     "react-typed": "^1.2.0"
   }

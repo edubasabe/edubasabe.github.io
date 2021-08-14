@@ -28,7 +28,6 @@ const Works = () => {
     }
   `);
 
-  console.log("works", works);
   return (
     <Layout>
       <Container maxW="container.xl" pt="4">

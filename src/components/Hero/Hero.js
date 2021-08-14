@@ -8,7 +8,6 @@ import {
   Link,
   Stack,
   Text,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 
 import Typed from "react-typed";
