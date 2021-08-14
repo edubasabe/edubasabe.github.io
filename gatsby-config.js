@@ -5,6 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "ebasabe",
+    siteUrl: "https://edubasabe.github.io",
   },
   plugins: [
     "gatsby-plugin-image",

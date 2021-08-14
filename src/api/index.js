@@ -1,6 +1,5 @@
 import axios from "axios";
-const apiUrl = "http://localhost:9000/.netlify/functions/server/contact/send";
-
+const apiUrl = process.env.GATSBY_API_URL;
 axios.create({
   baseURL: apiUrl,
 });
