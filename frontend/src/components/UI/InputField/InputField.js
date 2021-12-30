@@ -6,7 +6,7 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 
-const InputField = ({ name, label, register, errors }) => {
+const InputField = ({ name, label, register, errors, ...props }) => {
   return (
     <FormControl mb="6" isInvalid={errors[name] && errors[name].message}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
@@ -17,6 +17,7 @@ const InputField = ({ name, label, register, errors }) => {
         {...register(name, {
           required: "This field is required",
         })}
+        {...props}
       />
 
       {errors[name] && (

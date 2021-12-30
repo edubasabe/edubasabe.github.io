@@ -33,6 +33,7 @@ const DesktopNav = () => {
                 fontWeight={500}
                 color={popoverTextColor}
                 _hover={popoverTextColorHover}
+                borderRadius={"lg"}
               >
                 {navItem.label}
               </Link>
