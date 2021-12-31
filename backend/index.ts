@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import logger from "morgan";
 /* import cors from "cors";
 import corsOptions from './utils/corsConfig' */
-import router from './router/router'
+import router from './routes/router'
 
 dotenv.config();
 const app = express();
