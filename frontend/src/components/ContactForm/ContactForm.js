@@ -12,7 +12,7 @@ import {
 import { Alert, AlertIcon, AlertTitle, CloseButton } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import InputField from "../UI/InputField/InputField";
-import { sendEmail } from "../../api/index";
+import { validateCAPTCHA } from "../../api/index";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm = () => {
@@ -21,8 +21,9 @@ const ContactForm = () => {
   const { register, handleSubmit, formState, reset } = useForm();
   const { errors, isDirty, isValid } = formState;
 
-  function onChange(value) {
-    console.log("Captcha value:", value);
+  async function handleCAPTCHAChange(token) {
+    console.log("Captcha value:", token);
+    validateCAPTCHA(token);
   }
 
   const handleFormSubmit = async ({ full_name, email, message }) => {
@@ -85,7 +86,7 @@ const ContactForm = () => {
         <Flex mb="4">
           <ReCAPTCHA
             sitekey={process.env.GATSBY_RECAPTCHA_SITE_KEY}
-            onChange={onChange}
+            onChange={handleCAPTCHAChange}
           />
         </Flex>
         <Button

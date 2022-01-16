@@ -7,3 +7,7 @@ axios.create({
 export function sendEmail(data) {
   return axios.post(apiUrl, data);
 }
+
+export function validateCAPTCHA(token) {
+  return axios.post(apiUrl, { token });
+}
