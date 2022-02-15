@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { sendEmail, SendEmailProps } from "../controllers/mailerController";
+import { sendEmail, SendEmailProps } from "./mailerController";
 
 export function sendMessage(req: Request, res: Response) {
   const errors = validationResult(req);
