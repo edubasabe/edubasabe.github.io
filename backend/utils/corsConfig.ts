@@ -1,16 +1,18 @@
+import dotenv from "dotenv";
 import { CorsOptions } from "cors";
-import { PORT } from "../index";
-const whitelist = [`http://localhost:${PORT}`, 'https://edubasabe.github.io'];
+dotenv.config();
+
+const { DOMAINS_ALLOWED } = process.env;
+const whitelist = DOMAINS_ALLOWED?.split(",");
+
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    console.log("origin", origin);
-    console.log("whitelist", whitelist);
-    if (origin && whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
+    if (origin && whitelist?.indexOf(origin) !== -1) {
+      callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'))
+      callback(new Error("Not allowed by CORS"));
     }
-  }
-}
+  },
+};
 
 export default corsOptions;
