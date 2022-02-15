@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Backend for ebasabe website",
   "main": "index.ts",
+  "engines": {
+    "node": "16.13.2"
+  },
   "scripts": {
     "test": "npm start",
     "start": "nodemon index.ts",
-    "build": "tsc --project ./"
+    "build": "tsc --project ./",
+    "start:local": "nodemon build/index.js"
   },
   "author": "David Basabe",
   "license": "ISC",
