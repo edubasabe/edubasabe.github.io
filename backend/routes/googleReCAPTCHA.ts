@@ -4,7 +4,7 @@ dotenv.config();
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 
-export async function googleReCAPTCHA(req: Request, res: Response) {
+async function googleReCAPTCHA(req: Request, res: Response) {
   const errors = validationResult(req);
   console.log(errors);
   if (!errors.isEmpty()) {
@@ -39,3 +39,5 @@ async function validateCAPTCHA(token: string): Promise<boolean> {
     return false;
   }
 }
+
+export default googleReCAPTCHA;

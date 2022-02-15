@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import validateDomainOrigin from "../middlewares/validateDomainOrigin";
-import { googleReCAPTCHA } from "./googleReCaptcha";
+import googleReCAPTCHA from "./googleReCaptcha";
 import { sendMessage } from "./sendMessage";
+
 const router = express.Router();
 
 router.get("/", (req: Request, res: Response) => {
