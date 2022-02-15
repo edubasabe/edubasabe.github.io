@@ -11,6 +11,7 @@
   "author": "David Basabe",
   "license": "ISC",
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@types/cors": "^2.8.12",
     "@types/morgan": "^1.9.3",
     "@types/nodemailer": "^6.4.4",
