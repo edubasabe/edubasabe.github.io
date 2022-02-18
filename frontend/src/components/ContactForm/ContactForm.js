@@ -12,7 +12,7 @@ const ContactForm = () => {
   const [isValidCAPTCHA, setIsValidCAPTCHA] = useState(false);
 
   const { register, handleSubmit, formState, reset } = useForm();
-  const { errors, isDirty, isValid } = formState;
+  const { errors } = formState;
 
   async function handleCAPTCHAChange(token) {
     try {
@@ -92,7 +92,7 @@ const ContactForm = () => {
           <Button
             type="submit"
             colorScheme="blue"
-            disabled={loading || !isValidCAPTCHA || (isDirty && !isValid)}
+            disabled={loading || !isValidCAPTCHA}
             isLoading={loading}
           >
             Send message
