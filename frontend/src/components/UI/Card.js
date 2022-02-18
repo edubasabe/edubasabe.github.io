@@ -7,17 +7,18 @@ import {
   Text,
   Stack,
   useColorModeValue,
+  Icon,
 } from "@chakra-ui/react";
 
 import { css } from "@emotion/react";
 import { theme } from "@chakra-ui/react";
+import { Link } from "gatsby";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function Card({ title, link, image, height }) {
   const { colors } = theme;
   const cardStyles = css`
     background-color: ${colors.black};
-    transition: all 400ms ease;
-
     .card__text-container {
       opacity: 0;
     }
@@ -48,35 +49,38 @@ export default function Card({ title, link, image, height }) {
         overflow={"hidden"}
         position="relative"
         css={cardStyles}
+        transition="all 400ms ease"
       >
-        <Image
-          h={height}
-          w={"full"}
-          src={image}
-          objectFit={"cover"}
-          className="card__image"
-        />
+        <Link to={link} target="_blank">
+          <Image
+            h={height}
+            w={"full"}
+            src={image}
+            objectFit={"cover"}
+            className="card__image"
+          />
 
-        <Box
-          p={2}
-          position="absolute"
-          bottom="0"
-          w="full"
-          className="card__text-container"
-        >
-          <Stack spacing={0} align={"left"} mb={2}>
-            <Heading
-              fontSize={"lg"}
-              fontWeight="bold"
-              color="white"
-              fontFamily={"body"}
-              textAlign="left"
-            >
-              {title}
-            </Heading>
-            <Text color={"whiteAlpha.800"}>{link}</Text>
-          </Stack>
-        </Box>
+          <Box
+            p={2}
+            position="absolute"
+            bottom="0"
+            w="full"
+            className="card__text-container"
+          >
+            <Stack spacing={0} align={"left"} mb={2}>
+              <Heading
+                fontSize={"lg"}
+                fontWeight="bold"
+                color="white"
+                fontFamily={"body"}
+                textAlign="left"
+              >
+                {title} <Icon as={ExternalLinkIcon}></Icon>
+              </Heading>
+              <Text color={"whiteAlpha.800"}>{link}</Text>
+            </Stack>
+          </Box>
+        </Link>
       </Box>
     </Center>
   );

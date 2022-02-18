@@ -12,7 +12,7 @@ import { CheckIcon } from "@chakra-ui/icons";
 import React, { Fragment } from "react";
 import Layout from "../components/Layout/Layout";
 import SKILLS from "../constants/skills";
-import AboutImage from "../images/about-me.jpg";
+import AboutImage from "../images/about-me-compressed.jpg";
 
 const About = () => {
   const categories = Object.keys(SKILLS);

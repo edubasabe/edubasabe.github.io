@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-
+import coverImage from "../../images/cover.jpeg";
 import Typed from "react-typed";
 
 export default function SplitScreen() {
@@ -22,7 +22,12 @@ export default function SplitScreen() {
         <Stack spacing={6} w={"full"} maxW={"lg"}>
           <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
             <Typed
-              strings={["FrontEnd Developer", "UI Designer"]}
+              strings={[
+                "FrontEnd Developer",
+                "Full Stack Developer",
+                "UI Designer",
+                "FrontEnd Engineer",
+              ]}
               typeSpeed={50}
               loop={true}
             />
@@ -69,13 +74,7 @@ export default function SplitScreen() {
         </Stack>
       </Flex>
       <Flex flex={1}>
-        <Image
-          alt={"Login Image"}
-          objectFit={"cover"}
-          src={
-            "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-          }
-        />
+        <Image alt={"Login Image"} objectFit={"cover"} src={coverImage} />
       </Flex>
     </Stack>
   );

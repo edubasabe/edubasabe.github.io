@@ -11,9 +11,7 @@ const InputField = ({ name, label, register, errors, ...props }) => {
     <FormControl mb="6" isInvalid={errors[name] && errors[name].message}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Input
-        type="text"
         id={name}
-        placeholder="Your name"
         {...register(name, {
           required: "This field is required",
         })}

@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  Text,
-  Textarea,
-  Button,
-  FormErrorMessage,
-} from "@chakra-ui/react";
+import { Flex, Text, Textarea, Button } from "@chakra-ui/react";
 import { Alert, AlertIcon, AlertTitle, CloseButton } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import InputField from "../UI/InputField/InputField";
@@ -21,7 +12,7 @@ const ContactForm = () => {
   const [isValidCAPTCHA, setIsValidCAPTCHA] = useState(false);
 
   const { register, handleSubmit, formState, reset } = useForm();
-  const { errors } = formState;
+  const { errors, isDirty, isValid } = formState;
 
   async function handleCAPTCHAChange(token) {
     try {
@@ -56,29 +47,32 @@ const ContactForm = () => {
       rounded="md"
       boxShadow="md"
       direction={"column"}
-      minWidth={"md"}
+      minWidth={"sm"}
     >
       {!submitted && (
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <InputField
+            type="text"
             name="full_name"
             label="Name"
+            placeholder="Your name"
             errors={errors}
             register={register}
             disabled={loading}
+            required
           />
-          <FormControl mb="6" isInvalid={errors.email && errors.email.message}>
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <Input
-              id="email"
-              type="email"
-              placeholder="Your email"
-              {...register("email", { required: "This field is required" })}
-            />
-            {errors.email && (
-              <FormErrorMessage>{errors.email.message}</FormErrorMessage>
-            )}
-          </FormControl>
+
+          <InputField
+            name="email"
+            label="Email"
+            placeholder="Your email"
+            type="email"
+            errors={errors}
+            register={register}
+            disabled={loading}
+            required
+          />
+
           <Text mb="2" fontWeight="medium">
             Message
           </Text>
@@ -86,6 +80,7 @@ const ContactForm = () => {
             placeholder="Your message"
             isInvalid={errors.message && errors.message.message}
             mb="4"
+            required
             {...register("message", { required: "This field is required" })}
           />
           <Flex mb="4">
@@ -97,7 +92,7 @@ const ContactForm = () => {
           <Button
             type="submit"
             colorScheme="blue"
-            disabled={loading || !isValidCAPTCHA}
+            disabled={loading || !isValidCAPTCHA || (isDirty && !isValid)}
             isLoading={loading}
           >
             Send message
