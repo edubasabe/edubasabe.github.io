@@ -8,10 +8,10 @@
   },
   "scripts": {
     "test": "npm start",
-    "start": "node build/index.js",
-    "dev": "nodemon index.ts",
+    "start": "NODE_ENV=production node build/index.js",
+    "dev": "NODE_ENV=development nodemon index.ts",
     "build": "tsc --project ./",
-    "start:local": "nodemon build/index.js"
+    "start:local": "NODE_ENV=production nodemon build/index.js"
   },
   "author": "David Basabe",
   "license": "ISC",
