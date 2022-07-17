@@ -31,30 +31,9 @@ export default function SplitScreen() {
               typeSpeed={50}
               loop={true}
             />
-            {/* <Text
-              as={"span"}
-              position={"relative"}
-              _after={{
-                content: "''",
-                width: "full",
-                height: useBreakpointValue({ base: "20%", md: "30%" }),
-                position: "absolute",
-                bottom: 1,
-                left: 0,
-                bg: "blue.400",
-                zIndex: -1,
-              }}
-            >
-              FrontEnd Engineer
-            </Text> */}
-            <br />{" "}
-            {/* <Text color={"blue.400"} as={"span"}>
-              Senior
-            </Text>{" "} */}
           </Heading>
           <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
-            More than 4 years of experience building digital products for very
-            important companies.
+            Since 2017 building digital experiences.
           </Text>
           <Stack direction={{ base: "column", md: "row" }} spacing={4}>
             <Button

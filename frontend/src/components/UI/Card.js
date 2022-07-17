@@ -43,7 +43,7 @@ export default function Card({ title, link, image, height }) {
         maxW={"270px"}
         w={"full"}
         bg={useColorModeValue("white", "gray.800")}
-        boxShadow={"2xl"}
+        boxShadow={"sm"}
         rounded={"md"}
         overflow={"hidden"}
         position="relative"

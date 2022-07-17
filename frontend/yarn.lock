@@ -7323,6 +7323,14 @@ gatsby-parcel-config@^0.9.2:
     "@parcel/transformer-raw" "2.6.0"
     "@parcel/transformer-react-refresh-wrap" "2.6.0"
 
+gatsby-plugin-google-gtag@^4.18.0:
+  version "4.18.0"
+  resolved "https://cepsa.jfrog.io/artifactory/api/npm/cepsa-global-npm/gatsby-plugin-google-gtag/-/gatsby-plugin-google-gtag-4.18.0.tgz#b06adf0a57661694c41e3b748936a1a6f521f7bc"
+  integrity sha512-oLIFmndlvmPyMlDR2z0NkTyTg05VLIi6vYlCUiqOaf1AOQKkmV9UxX0pwCDGuKxQPGIY3n8UkhkSqERIvQL2Dw==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    minimatch "^3.1.2"
+
 gatsby-plugin-image@^2.18.1:
   version "2.18.1"
   resolved "https://cepsa.jfrog.io/artifactory/api/npm/cepsa-global-npm/gatsby-plugin-image/-/gatsby-plugin-image-2.18.1.tgz#4e3f525c8e138368527c7bf17f839e774522908f"
