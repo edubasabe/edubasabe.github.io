@@ -12,7 +12,6 @@ import {
 
 import { css } from "@emotion/react";
 import { theme } from "@chakra-ui/react";
-import { Link } from "gatsby";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function Card({ title, link, image, height }) {
@@ -51,7 +50,7 @@ export default function Card({ title, link, image, height }) {
         css={cardStyles}
         transition="all 400ms ease"
       >
-        <Link to={link} target="_blank">
+        <a href={link} rel="noreferrer" target="_blank">
           <Image
             h={height}
             w={"full"}
@@ -80,7 +79,7 @@ export default function Card({ title, link, image, height }) {
               <Text color={"whiteAlpha.800"}>{link}</Text>
             </Stack>
           </Box>
-        </Link>
+        </a>
       </Box>
     </Center>
   );
