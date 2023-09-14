@@ -4,14 +4,14 @@ import Layout from "../layouts/Layout.astro"
 import Cover from "../assets/images/cover.jpg"
 ---
 
-<Layout title="Home" class="min-h-screen flex flex-col justify-between">
-  <main class="flex-1 flex items-center">
-    <div class="flex-[2] shrink-0 px-4 xl:px-14">
+<Layout title="Home" class="md:min-h-screen flex flex-col justify-between">
+  <main class="flex-1 flex flex-col md:flex-row items-center">
+    <div class="flex-[2] mb-4 shrink-0 px-4 xl:px-14 flex items-center">
       <div
-        class="font-extrabold text-7xl md:text-7xl [text-wrap:balance] bg-clip-text text-transparent bg-gradient-to-r from-slate-800/80 to-50% to-slate-900 tracking-tight"
+        class="font-extrabold text-5xl md:text-7xl [text-wrap:balance] bg-clip-text text-transparent bg-gradient-to-r from-slate-800/80 to-50% to-slate-900 tracking-tight"
       >
-        Let's make an amazing <span
-          class="text-blue-500 inline-flex flex-col h-[calc(theme(fontSize.4xl)*theme(lineHeight.tight))] md:h-[calc(theme(fontSize.7xl)*theme(lineHeight.tight))] overflow-hidden"
+        Let's build an amazing <span
+          class="text-blue-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] md:h-[calc(theme(fontSize.7xl)*theme(lineHeight.tight))] overflow-hidden"
         >
           <ul
             class="block animate-text-slide-5 text-left leading-tight [&_li]:block"
@@ -29,8 +29,8 @@ import Cover from "../assets/images/cover.jpg"
     <Image
       src={Cover}
       alt={"Two women in a computer"}
-      class="flex-1 rounded-l-3xl"
-      height={720}
+      class="flex-1 max-w-[90vw] rounded-3xl max-h-[320px] xl:max-h-[420px] xl:rounded-l-3xl 2xl:max-h-[720px]"
+      loading="eager"
     />
   </main>
 </Layout>
