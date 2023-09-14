@@ -1,10 +1,12 @@
 ---
+import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
+import Cover from "../assets/images/cover.jpg"
 ---
 
-<Layout title="ebasabe" class="min-h-screen flex flex-col justify-between">
-  <main>
-    <div class="mx-auto max-w-6xl">
+<Layout title="Home" class="min-h-screen flex flex-col justify-between">
+  <main class="flex-1 flex items-center">
+    <div class="flex-[2] shrink-0 px-4 xl:px-14">
       <div
         class="font-extrabold text-7xl md:text-7xl [text-wrap:balance] bg-clip-text text-transparent bg-gradient-to-r from-slate-800/80 to-50% to-slate-900 tracking-tight"
       >
@@ -24,5 +26,11 @@ import Layout from "../layouts/Layout.astro"
         </span>
       </div>
     </div>
+    <Image
+      src={Cover}
+      alt={"Two women in a computer"}
+      class="flex-1 rounded-l-3xl"
+      height={720}
+    />
   </main>
 </Layout>
