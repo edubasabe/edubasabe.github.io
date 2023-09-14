@@ -2,8 +2,27 @@
 import Layout from "../layouts/Layout.astro"
 ---
 
-<Layout title="ebasabe">
+<Layout title="ebasabe" class="min-h-screen flex flex-col justify-between">
   <main>
-    <h1 class="text-white">Hola</h1>
+    <div class="mx-auto max-w-6xl">
+      <div
+        class="font-extrabold text-7xl md:text-7xl [text-wrap:balance] bg-clip-text text-transparent bg-gradient-to-r from-slate-200/60 to-50% to-slate-200"
+      >
+        Let's make an amazing <span
+          class="text-sky-500 inline-flex flex-col h-[calc(theme(fontSize.4xl)*theme(lineHeight.tight))] md:h-[calc(theme(fontSize.7xl)*theme(lineHeight.tight))] overflow-hidden"
+        >
+          <ul
+            class="block animate-text-slide-5 text-left leading-tight [&_li]:block"
+          >
+            <li>project</li>
+            <li>website</li>
+            <li>web app</li>
+            <li>ecommerce</li>
+            <li>software</li>
+            <li aria-hidden="true">project</li>
+          </ul>
+        </span>
+      </div>
+    </div>
   </main>
 </Layout>

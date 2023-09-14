@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import ContactImage from "../assets/images/contact.jpeg"
+import { Image } from "astro:assets"
 ---
 
 <Layout title="ebasabe">
@@ -59,11 +60,12 @@ import ContactImage from "../assets/images/contact.jpeg"
               >Submit</button
             >
           </form>
-          <div
-            class="flex-1 rounded-lg shadow-md border bg-cover"
-            style={{ backgroundImage: `url(${ContactImage.src})` }}
-          >
-          </div>
+          <Image
+            src={ContactImage}
+            alt={"Contact Image"}
+            class={"flex-1 rounded-lg shadow-md border overflow-hidden"}
+            height={520}
+          />
         </div>
       </div>
     </section>
