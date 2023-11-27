@@ -18,11 +18,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: github-pages
+    env:
+      CONTENTFUL_SPACE_ID: ${{ vars.CONTENTFUL_SPACE_ID }}
+      CONTENTFUL_DELIVERY_TOKEN: ${{ vars.CONTENTFUL_DELIVERY_TOKEN }}
+      CONTENTFUL_PREVIEW_TOKEN: ${{ vars.CONTENTFUL_PREVIEW_TOKEN }}
     steps:
       - name: Check vars
         run: |
-          echo "space_id: ${{ env.CONTENTFUL_SPACE_ID}}"
-          echo "delivery_token: ${{ vars.CONTENTFUL_DELIVERY_TOKEN }}"
+          echo "space_id: $CONTENTFUL_SPACE_ID"
+          echo "delivery_token: $CONTENTFUL_DELIVERY_TOKEN"
           echo "preview_token: $CONTENTFUL_PREVIEW_TOKEN"
 
       - name: Checkout your repository using git
