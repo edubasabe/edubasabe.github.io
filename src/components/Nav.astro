@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets"
+import Sprite from "../assets/logo-ebasabe.svg"
+
+interface Props {
+  links: {
+    label: string
+    href: string
+  }[]
+}
+
+const { links } = Astro.props
+---
+
+<nav
+  class="flex items-center justify-between px-4 py-3 mx-auto max-w-6xl md:px-0 md:space-x-10"
+>
+  <a href="/" class="text-gray-800 font-semibold text-2xl relative py-3">
+    <span class="sr-only">ebasabe</span>
+    <Image
+      src={Sprite}
+      alt={"logo"}
+      class="h-6 md:h-5 w-auto"
+      loading="eager"
+    />
+  </a>
+  <ul class="flex gap-x-4 items-center text-sm">
+    {
+      links.map(({ href, label }) => (
+        <li class="hidden md:block">
+          <a
+            href={href}
+            class="text-gray-600 font-medium py-2 px-3 hover:bg-blue-300/10 hover:text-blue-950 rounded-md"
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+    <li>
+      <a
+        href="/contact"
+        class="from-blue-500 to-blue-600 ring-brandred-500 shadow-blue-500/40 rounded-md bg-gradient-to-tr px-4 py-1.5 font-semibold text-white shadow-lg md:ml-5 tracking-wide block leading-6"
+        >Contact</a
+      >
+    </li>
+  </ul>
+</nav>

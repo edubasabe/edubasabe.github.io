@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets"
+import Layout from "../layouts/Layout.astro"
+import Cover from "../assets/images/cover.jpg"
+import Hero from "../components/Hero.astro"
+---
+
+<Layout title="Home" class="md:min-h-screen flex flex-col justify-between">
+  <main class="flex-1 flex flex-col md:flex-row items-center">
+    <Hero
+      title="Let's build an amazing"
+      variable={["project", "website", "web app", "ecommerce", "software"]}
+    />
+    <Image
+      src={Cover}
+      alt={"Two women in a computer"}
+      class="flex-1 my-4 max-w-[90vw] rounded-2xl lg:rounded-l-3xl max-h-[320px] xl:max-h-[420px] xl:rounded-l-3xl 2xl:max-h-[720px]"
+      loading="eager"
+    />
+  </main>
+</Layout>

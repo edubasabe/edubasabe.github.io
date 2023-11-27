@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro"
+import ContactImage from "../assets/images/contact.jpeg"
+import { Image } from "astro:assets"
+---
+
+<Layout title="Contact" class="md:min-h-screen flex flex-col">
+  <main class="px-4 relative">
+    <div class="mx-auto xl:max-w-6xl">
+      <div class="pb-6 flex flex-col gap-y-1">
+        <h2 class="text-3xl font-bold">Let's get in touch</h2>
+        <p class="md:text-lg md:font-light text-slate-500">
+          Have a question, need help, or interested in getting started in Web?
+        </p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-x-4">
+        <form
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          class="flex flex-col flex-1 max-w-md md:py-10 md:px-8 md:border rounded-xl gap-4 md:shadow-md"
+        >
+          <input
+            type="hidden"
+            name="access_key"
+            value="cdbb2e35-d45f-484e-ac21-e76fe500e381"
+          />
+          <div class="flex flex-col gap-y-1">
+            <label for="name" class="font-medium">Name</label>
+            <input
+              type="text"
+              name="name"
+              class="border rounded-md h-10 p-2 font-normal hover:border-slate-300"
+              placeholder="Your name"
+              required
+            />
+          </div>
+          <div class="flex flex-col gap-y-1">
+            <label for="email" class="font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              class="border rounded-md h-10 p-2 font-normal hover:border-slate-300"
+              placeholder="Your email"
+              required
+            />
+          </div>
+          <div class="flex flex-col gap-y-1">
+            <label for="message" class="font-medium">Message</label>
+            <textarea
+              name="message"
+              class="border rounded-md p-2 h-20 font-normal hover:border-slate-300"
+              placeholder="Your message"
+              required></textarea>
+          </div>
+          <div class="h-captcha" data-captcha="true"></div>
+          <button
+            type="submit"
+            class="h-10 font-semibold rounded-md bg-blue-600 text-white"
+            >Submit</button
+          >
+        </form>
+        <Image
+          src={ContactImage}
+          alt={"Contact Image"}
+          class={"hidden sm:block flex-1 rounded-lg lg:rounded-3xl lg:border-none lg:shadow-none shadow-md border overflow-hidden h-[420px]"}
+        />
+      </div>
+    </div>
+  </main>
+</Layout>
+<script is:inline src="https://web3forms.com/client/script.js" async defer
+></script>

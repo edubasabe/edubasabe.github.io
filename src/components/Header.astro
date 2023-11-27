@@ -1,0 +1,20 @@
+---
+import Nav from "./Nav.astro"
+---
+
+<section
+  class="sticky z-50 w-full text-gray-900 bg-white bg-opacity-50 dark:bg-dark dark:text-gray-100 backdrop-filter backdrop-blur-lg dark:bg-opacity-50"
+>
+  <Nav
+    links={[
+      {
+        href: "/about",
+        label: "About",
+      },
+      {
+        href: "/portfolio",
+        label: "Portfolio",
+      },
+    ]}
+  />
+</section>

@@ -1,0 +1,56 @@
+---
+import { contentfulClient } from "../lib/contentful"
+import type { EntryFieldTypes } from "contentful"
+
+interface Websites {
+  contentTypeId: "websites"
+  fields: {
+    name: EntryFieldTypes.Text
+    url: EntryFieldTypes.Text
+    cover: EntryFieldTypes.AssetLink
+  }
+}
+export interface Cover {
+  fields: {
+    title: string
+    file: {
+      fileName: string
+      contentType: string
+      details: {
+        image: {
+          width: number
+          height: number
+        }
+        size: number
+      }
+      url: string
+    }
+    description: string
+  }
+}
+
+const entries = await contentfulClient.getEntries<Websites>({
+  content_type: "websites",
+})
+---
+
+<ul class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
+  {
+    entries.items.map((item) => {
+      const cover = item.fields.cover as Cover
+      return (
+        <li class="shadow-sm rounded-md border">
+          <a
+            href={item.fields.url}
+            class="font-semibold text-sm p-2 block relative"
+          >
+            <img src={cover.fields.file.url} alt={item.fields.name} />
+            <span class="absolute left-1 bottom-1 bg-white px-2 rounded-md">
+              {item.fields.name}
+            </span>
+          </a>
+        </li>
+      )
+    })
+  }
+</ul>

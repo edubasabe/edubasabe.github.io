@@ -1,0 +1,39 @@
+---
+// Supports weights 100-900
+import "@fontsource-variable/inter"
+import Footer from "../components/Footer.astro"
+import Header from "../components/Header.astro"
+
+interface Props {
+  title: string
+  class?: string
+}
+
+const { title, class: className } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Welcome to edubasabe's Portfolio | Frontend Engineer. Explore a showcase of my finest web creations and get to know me better. With a passion for Frontend development, I've crafted user-friendly, visually appealing websites that blend form and function seamlessly. Discover my projects and learn how I can bring your web visions to life."
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="David Basabe" />
+    <title>{title}</title>
+  </head>
+  <body class={className}>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>
+<style is:global>
+  body {
+    font-family: "Inter Variable", sans-serif;
+  }
+</style>
