@@ -2,34 +2,19 @@
 import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
 import Cover from "../assets/images/cover.jpg"
+import Hero from "../components/Hero.astro"
 ---
 
 <Layout title="Home" class="md:min-h-screen flex flex-col justify-between">
   <main class="flex-1 flex flex-col md:flex-row items-center">
-    <div class="flex-[2] mb-4 shrink-0 px-4 xl:px-14 flex items-center">
-      <div
-        class="font-extrabold text-5xl md:text-7xl [text-wrap:balance] bg-clip-text text-transparent bg-gradient-to-r from-slate-800/80 to-50% to-slate-900 tracking-tight"
-      >
-        Let's build an amazing <span
-          class="text-blue-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] md:h-[calc(theme(fontSize.7xl)*theme(lineHeight.tight))] overflow-hidden"
-        >
-          <ul
-            class="block animate-text-slide-5 text-left leading-tight [&_li]:block"
-          >
-            <li class="tracking-tight">project</li>
-            <li class="tracking-tight">website</li>
-            <li class="tracking-tight">web app</li>
-            <li class="tracking-tight">ecommerce</li>
-            <li class="tracking-tight">software</li>
-            <li aria-hidden="true" class="tracking-tight">project</li>
-          </ul>
-        </span>
-      </div>
-    </div>
+    <Hero
+      title="Let's build an amazing"
+      variable={["project", "website", "web app", "ecommerce", "software"]}
+    />
     <Image
       src={Cover}
       alt={"Two women in a computer"}
-      class="flex-1 max-w-[90vw] rounded-3xl max-h-[320px] xl:max-h-[420px] xl:rounded-l-3xl 2xl:max-h-[720px]"
+      class="flex-1 my-4 max-w-[90vw] rounded-2xl lg:rounded-l-3xl max-h-[320px] xl:max-h-[420px] xl:rounded-l-3xl 2xl:max-h-[720px]"
       loading="eager"
     />
   </main>
