@@ -24,7 +24,7 @@ const { links } = Astro.props
       loading="eager"
     />
   </a>
-  <ul class="flex gap-x-4">
+  <ul class="flex gap-x-4 items-center text-sm">
     {
       links.map(({ href, label }) => (
         <li class="hidden md:block">
@@ -40,7 +40,7 @@ const { links } = Astro.props
     <li>
       <a
         href="/contact"
-        class="from-blue-500 to-blue-600 ring-brandred-500 shadow-blue-500/40 rounded-md bg-gradient-to-tr px-6 py-3 font-semibold text-white shadow-lg md:ml-5"
+        class="from-blue-500 to-blue-600 ring-brandred-500 shadow-blue-500/40 rounded-md bg-gradient-to-tr px-4 py-1.5 font-semibold text-white shadow-lg md:ml-5 tracking-wide block leading-6"
         >Contact</a
       >
     </li>

@@ -5,11 +5,11 @@ import { Image } from "astro:assets"
 ---
 
 <Layout title="Contact" class="md:min-h-screen flex flex-col">
-  <main class="px-4">
+  <main class="px-4 relative">
     <div class="mx-auto xl:max-w-6xl">
-      <div class="pb-6 flex flex-col gap-y-2">
-        <h2 class="text-4xl font-bold">Let's get in touch</h2>
-        <p class="md:text-xl md:font-light text-slate-500">
+      <div class="pb-6 flex flex-col gap-y-1">
+        <h2 class="text-3xl font-bold">Let's get in touch</h2>
+        <p class="md:text-lg md:font-light text-slate-500">
           Have a question, need help, or interested in getting started in Web?
         </p>
       </div>
@@ -62,7 +62,7 @@ import { Image } from "astro:assets"
         <Image
           src={ContactImage}
           alt={"Contact Image"}
-          class={"hidden sm:block flex-1 rounded-lg shadow-md border overflow-hidden h-[520px]"}
+          class={"hidden sm:block flex-1 rounded-lg lg:rounded-3xl lg:border-none lg:shadow-none shadow-md border overflow-hidden h-[420px]"}
         />
       </div>
     </div>
