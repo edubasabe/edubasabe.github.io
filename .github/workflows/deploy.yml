@@ -17,9 +17,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      CONTENTFUL_DELIVERY_TOKEN: ${{ vars.CONTENTFUL_DELIVERY_TOKEN }}
-      CONTENTFUL_PREVIEW_TOKEN: ${{ vars.CONTENTFUL_PREVIEW_TOKEN }}
+    environment: github-pages
     steps:
       - name: Check vars
         run: |
