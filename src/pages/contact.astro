@@ -1,85 +1,86 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import ContactImage from "../assets/images/contact.jpeg"
 import { Image } from "astro:assets"
+import Layout from "../layouts/Layout.astro"
+import PageHeader from "../components/PageHeader.astro"
+import ContactImage from "../assets/images/contact.jpeg"
 import { getPage } from "../lib/content"
+import { SITE } from "../consts"
 
 const { data } = await getPage("contact")
+
+const field =
+  "block w-full rounded-lg border border-gray-300 bg-white px-3.5 text-base text-gray-900 placeholder:text-gray-400 transition-colors hover:border-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none"
 ---
 
-<Layout
-  title={data.title}
-  description={data.description}
-  class="md:min-h-screen flex flex-col"
->
-  <main id="main" class="px-4 relative">
-    <div class="mx-auto xl:max-w-6xl">
-      <div class="pb-6 flex flex-col gap-y-1">
-        <h1 class="text-3xl font-bold">{data.heading}</h1>
-        <p class="md:text-lg md:font-light text-slate-500">
-          {data.subheading}
-        </p>
-      </div>
-      <div class="flex flex-col md:flex-row gap-x-4">
+<Layout title={data.title} description={data.description}>
+  <div class="container-page pt-8 sm:pt-12 lg:pt-16">
+    <PageHeader title={data.heading ?? data.title} subtitle={data.subheading} />
+
+    <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
+      <div class="w-full max-w-xl">
         <form
           action="https://api.web3forms.com/submit"
           method="POST"
-          class="flex flex-col flex-1 max-w-md md:py-10 md:px-8 md:border rounded-xl gap-4 md:shadow-md"
+          class="flex flex-col gap-5 sm:rounded-2xl sm:border sm:border-gray-200 sm:p-8 sm:shadow-sm"
         >
-          <input
-            type="hidden"
-            name="access_key"
-            value="cdbb2e35-d45f-484e-ac21-e76fe500e381"
-          />
-          <div class="flex flex-col gap-y-1">
-            <label for="name" class="font-medium">Name</label>
+          <input type="hidden" name="access_key" value="cdbb2e35-d45f-484e-ac21-e76fe500e381" />
+          <div class="flex flex-col gap-1.5">
+            <label for="name" class="text-sm font-medium text-gray-900">Name</label>
             <input
               type="text"
               id="name"
               name="name"
               autocomplete="name"
-              class="border rounded-md h-10 p-2 font-normal hover:border-slate-300"
+              class:list={[field, "h-12"]}
               placeholder="Your name"
               required
             />
           </div>
-          <div class="flex flex-col gap-y-1">
-            <label for="email" class="font-medium">Email</label>
+          <div class="flex flex-col gap-1.5">
+            <label for="email" class="text-sm font-medium text-gray-900">Email</label>
             <input
               type="email"
               id="email"
               name="email"
               autocomplete="email"
-              class="border rounded-md h-10 p-2 font-normal hover:border-slate-300"
-              placeholder="Your email"
+              inputmode="email"
+              autocapitalize="off"
+              spellcheck="false"
+              class:list={[field, "h-12"]}
+              placeholder="you@example.com"
               required
             />
           </div>
-          <div class="flex flex-col gap-y-1">
-            <label for="message" class="font-medium">Message</label>
+          <div class="flex flex-col gap-1.5">
+            <label for="message" class="text-sm font-medium text-gray-900">Message</label>
             <textarea
               id="message"
               name="message"
-              class="border rounded-md p-2 h-20 font-normal hover:border-slate-300"
-              placeholder="Your message"
+              rows="5"
+              class:list={[field, "resize-y py-3"]}
+              placeholder="Tell me about your project"
               required></textarea>
           </div>
           <div class="h-captcha" data-captcha="true"></div>
-          <button
-            type="submit"
-            class="h-10 font-semibold rounded-md bg-blue-600 text-white hover:bg-blue-700"
-            >Submit</button
-          >
+          <button type="submit" class="btn-primary w-full">Send message</button>
         </form>
-        <Image
-          src={ContactImage}
-          alt="Hands typing on a laptop keyboard"
-          widths={[480, 960]}
-          sizes="(min-width: 768px) 50vw, 100vw"
-          class={"hidden sm:block flex-1 rounded-lg lg:rounded-3xl lg:border-none lg:shadow-none shadow-md border overflow-hidden h-[420px] object-cover"}
-        />
+        <p class="mt-6 text-sm text-gray-500 sm:text-center">
+          Prefer email? Write to{" "}
+          <a
+            href={`mailto:${SITE.email}`}
+            class="font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 hover:decoration-blue-600"
+            >{SITE.email}</a
+          >
+        </p>
       </div>
+      <Image
+        src={ContactImage}
+        alt="Hands typing on a laptop keyboard"
+        widths={[480, 960]}
+        sizes="480px"
+        class="hidden aspect-4/5 w-full rounded-2xl object-cover lg:block"
+      />
     </div>
-  </main>
+  </div>
 </Layout>
 <script is:inline src="https://web3forms.com/client/script.js" async defer></script>

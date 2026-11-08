@@ -7,6 +7,7 @@ import Header from "../components/Header.astro"
 import SEO, { type Props as SEOProps } from "../components/SEO.astro"
 
 interface Props extends SEOProps {
+  /** Classes for the <main> element */
   class?: string
 }
 
@@ -17,21 +18,24 @@ const { class: className, ...seo } = Astro.props
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#2563eb" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="format-detection" content="telephone=no" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
     <SEO {...seo} />
   </head>
-  <body class:list={["font-sans text-gray-900 antialiased", className]}>
+  <body class="flex min-h-svh flex-col bg-white font-sans text-gray-900 antialiased">
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-60 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:shadow-sm"
       >Skip to content</a
     >
     <Header />
-    <slot />
+    <main id="main" class:list={["flex-1", className]}>
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>

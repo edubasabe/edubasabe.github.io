@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets"
+import { Icon } from "astro-icon/components"
 import type { CollectionEntry } from "astro:content"
 
 interface Props {
@@ -7,29 +8,31 @@ interface Props {
 }
 
 const { projects } = Astro.props
+const host = (url: string) => new URL(url).hostname.replace(/^www\./, "")
 ---
 
-<ul class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<ul class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
   {
     projects.map(({ data }, i) => (
-      <li class="rounded-md border shadow-xs">
-        <a
-          href={data.url}
-          target="_blank"
-          rel="noopener"
-          class="relative block p-2 text-sm font-semibold"
-        >
-          <Image
-            src={data.cover}
-            alt={data.coverAlt}
-            widths={[400, 800]}
-            sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
-            loading={i < 3 ? "eager" : "lazy"}
-            class="aspect-16/10 w-full rounded-sm object-cover object-top"
-          />
-          <span class="absolute bottom-1 left-1 rounded-md bg-white px-2">
-            {data.name}
-          </span>
+      <li>
+        <a href={data.url} target="_blank" rel="noopener" class="group block">
+          <div class="overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+            <Image
+              src={data.cover}
+              alt={data.coverAlt}
+              widths={[400, 800]}
+              sizes="(min-width: 1024px) 304px, (min-width: 640px) 50vw, 100vw"
+              loading={i < 2 ? "eager" : "lazy"}
+              class="aspect-16/10 w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
+            />
+          </div>
+          <div class="mt-3 flex items-center justify-between gap-3">
+            <h2 class="font-semibold text-gray-900">{data.name}</h2>
+            <span class="flex min-w-0 items-center gap-1 text-sm text-gray-500 group-hover:text-blue-600">
+              <span class="truncate">{host(data.url)}</span>
+              <Icon name="mdi:arrow-top-right" class="size-4 shrink-0" aria-hidden="true" />
+            </span>
+          </div>
         </a>
       </li>
     ))

@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import ProjectList from "../components/ProjectList.astro"
+import PageHeader from "../components/PageHeader.astro"
 import { getPage, getProjects } from "../lib/content"
 
 const { data } = await getPage("portfolio")
@@ -13,7 +14,6 @@ const pageUrl = new URL("/portfolio", Astro.site).href
   description={data.description}
   image={projects[0]?.data.cover}
   imageAlt={projects[0]?.data.coverAlt}
-  class="md:min-h-screen"
   schema={[
     {
       "@type": "CollectionPage",
@@ -38,8 +38,8 @@ const pageUrl = new URL("/portfolio", Astro.site).href
     },
   ]}
 >
-  <main id="main" class="mx-auto max-w-6xl px-4 lg:pt-6 md:px-0">
-    <h1 class="mb-4 text-2xl font-semibold">{data.heading}</h1>
+  <div class="container-page pt-8 sm:pt-12 lg:pt-16">
+    <PageHeader title={data.heading ?? data.title} subtitle={data.subheading} />
     <ProjectList projects={projects} />
-  </main>
+  </div>
 </Layout>

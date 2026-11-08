@@ -1,7 +1,7 @@
 ---
 title: "About"
 description: "Meet David Basabe, a Senior Frontend Engineer from Venezuela with 6+ years building scalable web applications with React, Next.js, TypeScript and Node.js."
-heading: "Hi! 👋 I'm David Basabe (@edubasabe)"
+heading: "Hi! 👋 I'm David Basabe"
 subheading: "Software Developer from Venezuela 🇻🇪"
 techStack:
   - Next.js

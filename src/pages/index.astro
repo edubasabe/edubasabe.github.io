@@ -8,21 +8,19 @@ import { getPage } from "../lib/content"
 const { data } = await getPage("home")
 ---
 
-<Layout
-  title={data.title}
-  description={data.description}
-  class="flex flex-col justify-between md:min-h-screen"
->
-  <main id="main" class="flex flex-1 flex-col items-center md:flex-row">
-    <Hero title={data.heading ?? ""} words={data.words ?? []} />
+<Layout title={data.title} description={data.description} class="flex">
+  <section
+    class="container-page grid content-center gap-10 py-10 sm:py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-20"
+  >
+    <Hero title={data.heading ?? ""} words={data.words ?? []} intro={data.subheading} />
     <Image
       src={Cover}
       alt="Two people reviewing a website together on a laptop"
-      widths={[480, 960, 1350]}
-      sizes="(min-width: 768px) 50vw, 90vw"
-      class="my-4 max-h-[320px] max-w-[90vw] flex-1 rounded-2xl object-cover lg:rounded-l-3xl xl:max-h-[420px] xl:rounded-l-3xl 2xl:max-h-[720px]"
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 1024px) 480px, (min-width: 640px) calc(100vw - 4rem), calc(100vw - 2.5rem)"
+      class="aspect-4/3 w-full rounded-2xl object-cover sm:aspect-video lg:aspect-square"
       loading="eager"
       fetchpriority="high"
     />
-  </main>
+  </section>
 </Layout>

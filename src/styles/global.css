@@ -15,8 +15,23 @@
   }
 }
 
-/* Tailwind v4 changed the default border color to currentColor; keep the v3 look */
+/* Shared page container: mobile-first padding, capped width on large screens */
+@utility container-page {
+  @apply mx-auto w-full max-w-5xl px-5 sm:px-8;
+}
+
+@utility btn {
+  @apply inline-flex h-12 items-center justify-center gap-2 rounded-lg px-5 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600;
+}
+@utility btn-primary {
+  @apply btn bg-blue-600 text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700;
+}
+@utility btn-secondary {
+  @apply btn border border-gray-200 bg-white text-gray-900 hover:bg-gray-50;
+}
+
 @layer base {
+  /* Tailwind v4 changed the default border color to currentColor; keep the v3 look */
   *,
   ::after,
   ::before,
@@ -25,25 +40,64 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
+  :focus-visible {
+    outline-color: var(--color-blue-600);
+  }
+}
+
+/* Mobile menu sheet (native Popover API) */
+#mobile-menu {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    overlay 0.2s allow-discrete,
+    display 0.2s allow-discrete;
+  opacity: 0;
+  transform: translateY(-8px);
+}
+#mobile-menu:popover-open {
+  opacity: 1;
+  transform: none;
+}
+@starting-style {
+  #mobile-menu:popover-open {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+#mobile-menu::backdrop {
+  background: rgb(17 24 39 / 0.2);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-text-slide-5 {
     animation: none;
   }
+  #mobile-menu {
+    transition: none;
+  }
 }
 
 /* Markdown body styles (no typography plugin needed) */
 .prose-content h2 {
-  @apply mb-2 flex items-center gap-x-2 text-xl font-bold;
+  @apply mt-10 mb-3 text-lg font-semibold tracking-tight text-gray-900 sm:text-xl;
+}
+.prose-content h2:first-child {
+  @apply mt-0;
 }
 .prose-content p {
-  @apply mb-4;
+  @apply mb-4 leading-relaxed text-gray-700;
 }
 .prose-content a {
-  @apply text-blue-600 underline underline-offset-2 hover:text-blue-800;
+  @apply font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 hover:decoration-blue-600;
 }
