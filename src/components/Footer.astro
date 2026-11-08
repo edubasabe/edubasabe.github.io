@@ -1,6 +1,9 @@
 ---
 import { Icon } from "astro-icon/components"
 import { SITE } from "../consts"
+import { getLocale, useUI } from "../i18n/utils"
+
+const t = useUI(getLocale(Astro))
 ---
 
 <footer class="mt-16 border-t border-gray-100 sm:mt-24">
@@ -10,7 +13,7 @@ import { SITE } from "../consts"
     <p class="text-sm text-gray-500">
       © {new Date().getFullYear()} {SITE.author}
     </p>
-    <ul class="-mx-2 flex items-center gap-1" aria-label="Social profiles">
+    <ul class="-mx-2 flex items-center gap-1" aria-label={t.footer.social}>
       {
         SITE.social.map(({ label, icon, href }) => (
           <li>

@@ -1,19 +1,23 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import ProjectList from "../components/ProjectList.astro"
-import PageHeader from "../components/PageHeader.astro"
-import { getPage, getProjects } from "../lib/content"
+import Layout from "../../layouts/Layout.astro"
+import ProjectList from "../../components/ProjectList.astro"
+import PageHeader from "../../components/PageHeader.astro"
+import { getPage, getProjects } from "../../lib/content"
+import { getLocale, localePaths, localizedPath } from "../../i18n/utils"
 
-const { data } = await getPage("portfolio")
+export const getStaticPaths = () => localePaths()
+
+const locale = getLocale(Astro)
+const { data } = await getPage("portfolio", locale)
 const projects = await getProjects()
-const pageUrl = new URL("/portfolio", Astro.site).href
+const pageUrl = new URL(localizedPath("/portfolio", locale), Astro.site).href
 ---
 
 <Layout
   title={data.title}
   description={data.description}
   image={projects[0]?.data.cover}
-  imageAlt={projects[0]?.data.coverAlt}
+  imageAlt={projects[0]?.data.coverAlt[locale]}
   schema={[
     {
       "@type": "CollectionPage",

@@ -1,11 +1,16 @@
 ---
 import { Image } from "astro:assets"
-import Layout from "../layouts/Layout.astro"
-import Cover from "../assets/images/cover.jpg"
-import Hero from "../components/Hero.astro"
-import { getPage } from "../lib/content"
+import Layout from "../../layouts/Layout.astro"
+import Cover from "../../assets/images/cover.jpg"
+import Hero from "../../components/Hero.astro"
+import { getPage } from "../../lib/content"
+import { getLocale, localePaths, useUI } from "../../i18n/utils"
 
-const { data } = await getPage("home")
+export const getStaticPaths = () => localePaths()
+
+const locale = getLocale(Astro)
+const t = useUI(locale)
+const { data } = await getPage("home", locale)
 ---
 
 <Layout title={data.title} description={data.description} class="flex">
@@ -15,7 +20,7 @@ const { data } = await getPage("home")
     <Hero title={data.heading ?? ""} words={data.words ?? []} intro={data.subheading} />
     <Image
       src={Cover}
-      alt="Two people reviewing a website together on a laptop"
+      alt={t.home.imageAlt}
       widths={[480, 800, 1200]}
       sizes="(min-width: 1024px) 480px, (min-width: 640px) calc(100vw - 4rem), calc(100vw - 2.5rem)"
       class="aspect-4/3 w-full rounded-2xl object-cover sm:aspect-video lg:aspect-square"

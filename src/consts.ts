@@ -3,9 +3,7 @@ export const SITE = {
   name: "ebasabe",
   author: "David Basabe",
   handle: "@edubasabe",
-  jobTitle: "Senior Frontend Engineer",
   email: "ebasabedesign@gmail.com",
-  locale: "en_US",
   country: "Venezuela",
   knowsAbout: ["React", "Next.js", "TypeScript", "Astro", "Tailwind CSS", "Node.js", "PostgreSQL"],
   social: [

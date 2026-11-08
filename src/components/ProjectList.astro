@@ -2,12 +2,14 @@
 import { Image } from "astro:assets"
 import { Icon } from "astro-icon/components"
 import type { CollectionEntry } from "astro:content"
+import { getLocale } from "../i18n/utils"
 
 interface Props {
   projects: CollectionEntry<"projects">[]
 }
 
 const { projects } = Astro.props
+const locale = getLocale(Astro)
 const host = (url: string) => new URL(url).hostname.replace(/^www\./, "")
 ---
 
@@ -19,7 +21,7 @@ const host = (url: string) => new URL(url).hostname.replace(/^www\./, "")
           <div class="overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
             <Image
               src={data.cover}
-              alt={data.coverAlt}
+              alt={data.coverAlt[locale]}
               widths={[400, 800]}
               sizes="(min-width: 1024px) 304px, (min-width: 640px) 50vw, 100vw"
               loading={i < 2 ? "eager" : "lazy"}

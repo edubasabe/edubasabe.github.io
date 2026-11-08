@@ -1,15 +1,21 @@
 ---
-import Layout from "../../layouts/Layout.astro"
-import PageHeader from "../../components/PageHeader.astro"
-import PostCard from "../../components/PostCard.astro"
-import { getPage, getPosts } from "../../lib/content"
-import { breadcrumbs } from "../../lib/schema"
-import { SITE } from "../../consts"
+import Layout from "../../../layouts/Layout.astro"
+import PageHeader from "../../../components/PageHeader.astro"
+import PostCard from "../../../components/PostCard.astro"
+import { getPage, getPosts, postPath } from "../../../lib/content"
+import { breadcrumbs } from "../../../lib/schema"
+import { getLocale, localePaths, localizedPath, useUI } from "../../../i18n/utils"
+import { localeMeta } from "../../../i18n/ui"
+import { SITE } from "../../../consts"
 
-const { data } = await getPage("blog")
-const posts = await getPosts()
+export const getStaticPaths = () => localePaths()
+
+const locale = getLocale(Astro)
+const t = useUI(locale)
+const { data } = await getPage("blog", locale)
+const posts = await getPosts(locale)
 const site = Astro.site!
-const blogUrl = new URL("/blog", site).href
+const blogUrl = new URL(localizedPath("/blog", locale), site).href
 ---
 
 <Layout
@@ -23,23 +29,23 @@ const blogUrl = new URL("/blog", site).href
       "@type": "Blog",
       "@id": `${blogUrl}#blog`,
       url: blogUrl,
-      name: `${SITE.author} — Blog`,
+      name: t.blog.rssTitle,
       description: data.description,
-      inLanguage: "en",
+      inLanguage: localeMeta[locale].hreflang,
       author: { "@id": new URL("/#person", site).href },
       blogPost: posts.map((post) => ({
         "@type": "BlogPosting",
         headline: post.data.title,
         description: post.data.description,
-        url: new URL(`/blog/${post.id}`, site).href,
+        url: new URL(postPath(post, locale), site).href,
         datePublished: post.data.pubDate.toISOString(),
         dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
         author: { "@id": new URL("/#person", site).href },
       })),
     },
     breadcrumbs(site, [
-      { name: "Home", path: "/" },
-      { name: "Blog", path: "/blog" },
+      { name: t.nav.home, path: localizedPath("/", locale) },
+      { name: data.title, path: localizedPath("/blog", locale) },
     ]),
   ]}
 >
@@ -56,7 +62,7 @@ const blogUrl = new URL("/blog", site).href
         </ul>
       ) : (
         <p class="rounded-xl border border-dashed border-gray-300 p-8 text-center text-gray-500">
-          No posts yet — check back soon.
+          {t.blog.empty}
         </p>
       )
     }

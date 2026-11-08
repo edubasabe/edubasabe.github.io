@@ -1,4 +1,6 @@
 ---
+import { getLocale, localizedPath, useUI } from "../i18n/utils"
+
 interface Props {
   title: string
   words: string[]
@@ -6,6 +8,8 @@ interface Props {
 }
 
 const { title, words, intro } = Astro.props
+const locale = getLocale(Astro)
+const t = useUI(locale)
 ---
 
 <div>
@@ -23,7 +27,7 @@ const { title, words, intro } = Astro.props
   </h1>
   {intro && <p class="mt-5 max-w-md text-base text-pretty text-gray-500 sm:text-lg">{intro}</p>}
   <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-    <a href="/contact" class="btn-primary">Get in touch</a>
-    <a href="/portfolio" class="btn-secondary">See my work</a>
+    <a href={localizedPath("/contact", locale)} class="btn-primary">{t.hero.contact}</a>
+    <a href={localizedPath("/portfolio", locale)} class="btn-secondary">{t.hero.work}</a>
   </div>
 </div>

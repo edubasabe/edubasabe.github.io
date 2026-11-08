@@ -1,12 +1,17 @@
 ---
 import { Image } from "astro:assets"
-import Layout from "../layouts/Layout.astro"
-import PageHeader from "../components/PageHeader.astro"
-import ContactImage from "../assets/images/contact.jpeg"
-import { getPage } from "../lib/content"
-import { SITE } from "../consts"
+import Layout from "../../layouts/Layout.astro"
+import PageHeader from "../../components/PageHeader.astro"
+import ContactImage from "../../assets/images/contact.jpeg"
+import { getPage } from "../../lib/content"
+import { SITE } from "../../consts"
+import { getLocale, localePaths, useUI } from "../../i18n/utils"
 
-const { data } = await getPage("contact")
+export const getStaticPaths = () => localePaths()
+
+const locale = getLocale(Astro)
+const t = useUI(locale).contact
+const { data } = await getPage("contact", locale)
 
 const field =
   "block w-full rounded-lg border border-gray-300 bg-white px-3.5 text-base text-gray-900 placeholder:text-gray-400 transition-colors hover:border-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none"
@@ -25,19 +30,19 @@ const field =
         >
           <input type="hidden" name="access_key" value="cdbb2e35-d45f-484e-ac21-e76fe500e381" />
           <div class="flex flex-col gap-1.5">
-            <label for="name" class="text-sm font-medium text-gray-900">Name</label>
+            <label for="name" class="text-sm font-medium text-gray-900">{t.name}</label>
             <input
               type="text"
               id="name"
               name="name"
               autocomplete="name"
               class:list={[field, "h-12"]}
-              placeholder="Your name"
+              placeholder={t.namePlaceholder}
               required
             />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label for="email" class="text-sm font-medium text-gray-900">Email</label>
+            <label for="email" class="text-sm font-medium text-gray-900">{t.email}</label>
             <input
               type="email"
               id="email"
@@ -47,25 +52,25 @@ const field =
               autocapitalize="off"
               spellcheck="false"
               class:list={[field, "h-12"]}
-              placeholder="you@example.com"
+              placeholder={t.emailPlaceholder}
               required
             />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label for="message" class="text-sm font-medium text-gray-900">Message</label>
+            <label for="message" class="text-sm font-medium text-gray-900">{t.message}</label>
             <textarea
               id="message"
               name="message"
               rows="5"
               class:list={[field, "resize-y py-3"]}
-              placeholder="Tell me about your project"
+              placeholder={t.messagePlaceholder}
               required></textarea>
           </div>
           <div class="h-captcha" data-captcha="true"></div>
-          <button type="submit" class="btn-primary w-full">Send message</button>
+          <button type="submit" class="btn-primary w-full">{t.send}</button>
         </form>
         <p class="mt-6 text-sm text-gray-500 sm:text-center">
-          Prefer email? Write to{" "}
+          {t.preferEmail}{" "}
           <a
             href={`mailto:${SITE.email}`}
             class="font-medium text-blue-600 underline decoration-blue-600/30 underline-offset-4 hover:decoration-blue-600"
@@ -75,7 +80,7 @@ const field =
       </div>
       <Image
         src={ContactImage}
-        alt="Hands typing on a laptop keyboard"
+        alt={t.imageAlt}
         widths={[480, 960]}
         sizes="480px"
         class="hidden aspect-4/5 w-full rounded-2xl object-cover lg:block"

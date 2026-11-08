@@ -1,0 +1,57 @@
+---
+import { render } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import PageHeader from "../../components/PageHeader.astro"
+import { getPage } from "../../lib/content"
+import { getLocale, localePaths, localizedPath, useUI } from "../../i18n/utils"
+
+export const getStaticPaths = () => localePaths()
+
+const locale = getLocale(Astro)
+const t = useUI(locale)
+const page = await getPage("about", locale)
+const { data } = page
+const { Content } = await render(page)
+---
+
+<Layout
+  title={data.title}
+  description={data.description}
+  type="profile"
+  schema={[
+    {
+      "@type": "ProfilePage",
+      "@id": `${new URL(localizedPath("/about", locale), Astro.site).href}#profile`,
+      url: new URL(localizedPath("/about", locale), Astro.site).href,
+      mainEntity: { "@id": new URL("/#person", Astro.site).href },
+      name: t.about.pageName,
+    },
+  ]}
+>
+  <div class="container-page pt-8 sm:pt-12 lg:pt-16">
+    <div class="mx-auto max-w-2xl">
+      <PageHeader title={data.heading ?? data.title} subtitle={data.subheading} />
+
+      <article class="prose-content">
+        <Content />
+      </article>
+
+      {
+        data.techStack && (
+          <section aria-labelledby="tech-stack" class="mt-10">
+            <h2 id="tech-stack" class="mb-4 text-lg font-semibold tracking-tight sm:text-xl">
+              💻 {t.about.techStack}
+            </h2>
+            <ul class="flex flex-wrap gap-2">
+              {data.techStack.map((tech) => (
+                <li class="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+  </div>
+</Layout>

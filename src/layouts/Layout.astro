@@ -5,17 +5,41 @@ import "../styles/global.css"
 import Footer from "../components/Footer.astro"
 import Header from "../components/Header.astro"
 import SEO, { type Props as SEOProps } from "../components/SEO.astro"
+import { localeMeta, locales } from "../i18n/ui"
+import {
+  alternatesFor,
+  getLocale,
+  localizedPath,
+  useUI,
+  type Alternates,
+} from "../i18n/utils"
 
-interface Props extends SEOProps {
+interface Props extends Omit<SEOProps, "locale" | "alternates"> {
   /** Classes for the <main> element */
   class?: string
+  /** The page in each language it exists in. Defaults to the same path in every language. */
+  alternates?: Alternates
+  /** Where the language switcher goes when this page has no translation */
+  switchFallback?: string
 }
 
-const { class: className, ...seo } = Astro.props
+const { class: className, alternates: alternatesProp, switchFallback = "/", ...seo } = Astro.props
+
+const locale = getLocale(Astro)
+const t = useUI(locale)
+const alternates = alternatesProp ?? alternatesFor(Astro.url.pathname)
+const languages = locales
+  .filter((l) => l !== locale)
+  .map((l) => ({
+    locale: l,
+    label: localeMeta[l].label,
+    short: localeMeta[l].short,
+    href: alternates[l] ?? localizedPath(switchFallback, l),
+  }))
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={localeMeta[locale].hreflang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -23,17 +47,22 @@ const { class: className, ...seo } = Astro.props
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="alternate" type="application/rss+xml" title="David Basabe — Blog" href="/rss.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={t.blog.rssTitle}
+      href={localizedPath("/rss.xml", locale)}
+    />
     <meta name="generator" content={Astro.generator} />
-    <SEO {...seo} />
+    <SEO {...seo} locale={locale} alternates={alternates} />
   </head>
   <body class="flex min-h-svh flex-col bg-white font-sans text-gray-900 antialiased">
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-60 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:shadow-sm"
-      >Skip to content</a
+      >{t.skipToContent}</a
     >
-    <Header />
+    <Header languages={languages} />
     <main id="main" class:list={["flex-1", className]}>
       <slot />
     </main>

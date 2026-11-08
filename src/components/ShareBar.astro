@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components"
+import { getLocale, useUI } from "../i18n/utils"
 
 interface Props {
   url: string
@@ -7,12 +8,13 @@ interface Props {
 }
 
 const { url, title } = Astro.props
+const t = useUI(getLocale(Astro)).share
 const u = encodeURIComponent(url)
-const t = encodeURIComponent(title)
+const tt = encodeURIComponent(title)
 const links = [
-  { label: "Share on X", icon: "mdi:twitter", href: `https://twitter.com/intent/tweet?url=${u}&text=${t}` },
-  { label: "Share on LinkedIn", icon: "mdi:linkedin", href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}` },
-  { label: "Share on Facebook", icon: "mdi:facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${u}` },
+  { label: t.on("X"), icon: "mdi:twitter", href: `https://twitter.com/intent/tweet?url=${u}&text=${tt}` },
+  { label: t.on("LinkedIn"), icon: "mdi:linkedin", href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}` },
+  { label: t.on("Facebook"), icon: "mdi:facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${u}` },
 ]
 ---
 
@@ -22,17 +24,19 @@ const links = [
   <div
     class="pointer-events-auto flex items-center gap-1 rounded-full border border-gray-200 bg-white/90 px-2 py-1 shadow-lg backdrop-blur"
     role="group"
-    aria-label="Share this article"
+    aria-label={t.group}
   >
     <button
       type="button"
       data-share
       data-url={url}
       data-title={title}
+      data-label={t.share}
+      data-copied={t.copied}
       class="flex h-11 items-center gap-2 rounded-full px-3 text-sm font-medium text-gray-700 hover:text-gray-900"
     >
       <Icon name="mdi:share-variant-outline" class="size-5" aria-hidden="true" />
-      <span data-share-label>Share</span>
+      <span data-share-label>{t.share}</span>
     </button>
     <span class="h-4 border-l border-gray-200" aria-hidden="true"></span>
     {
@@ -57,7 +61,7 @@ const links = [
   for (const button of document.querySelectorAll<HTMLButtonElement>("[data-share]")) {
     const label = button.querySelector("[data-share-label]")!
     button.addEventListener("click", async () => {
-      const { url = location.href, title = document.title } = button.dataset
+      const { url = location.href, title = document.title, label: idle = "", copied = "" } = button.dataset
       if (navigator.share) {
         try {
           await navigator.share({ url, title })
@@ -67,8 +71,8 @@ const links = [
         return
       }
       await navigator.clipboard.writeText(url)
-      label.textContent = "Link copied"
-      setTimeout(() => (label.textContent = "Share"), 2000)
+      label.textContent = copied
+      setTimeout(() => (label.textContent = idle), 2000)
     })
   }
 </script>

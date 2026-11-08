@@ -10,14 +10,15 @@ const projects = defineCollection({
       name: z.string(),
       url: z.url(),
       cover: image(),
-      coverAlt: z.string(),
+      /** Alt text per language */
+      coverAlt: z.object({ en: z.string(), es: z.string() }),
       /** Used for ordering (newest first) */
       date: z.coerce.date(),
       draft: z.boolean().default(false),
     }),
 })
 
-/** Blog articles — one markdown file per post in src/content/blog */
+/** Blog articles — one markdown file per post and language: src/content/blog/<locale>/<slug>.md */
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.md" }),
   schema: ({ image }) =>
@@ -30,12 +31,14 @@ const blog = defineCollection({
       cover: image(),
       coverAlt: z.string(),
       tags: z.array(z.string()).default([]),
+      /** Links translations of the same post. Defaults to the file name (slug). */
+      translationKey: z.string().optional(),
       /** Drafts are visible in `bun run dev` but never built for production */
       draft: z.boolean().default(false),
     }),
 })
 
-/** Copy and SEO metadata for each site page, in src/content/pages */
+/** Copy and SEO metadata for each site page: src/content/pages/<locale>/<page>.md */
 const pages = defineCollection({
   loader: glob({ base: "./src/content/pages", pattern: "**/*.md" }),
   schema: z.object({

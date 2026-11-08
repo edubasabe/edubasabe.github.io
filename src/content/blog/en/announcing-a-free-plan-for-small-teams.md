@@ -3,7 +3,7 @@ title: "Announcing a free plan for small teams"
 description: "Why we're opening up a free plan so individual designers, startups and small teams can build a culture of openness and sharing from day one."
 pubDate: 2026-10-20
 updatedDate: 2026-10-28
-cover: "./images/woman-at-table.jpg"
+cover: "../images/woman-at-table.jpg"
 coverAlt: "A smiling woman sitting at a kitchen table holding a phone"
 tags: ["Plan", "Web development", "Free", "Team"]
 draft: true # demo content — remove or set to false to publish
@@ -21,7 +21,7 @@ That's why we are excited to share that we now have a [free version of Preline](
 >
 > — Nicole Grazioso
 
-![A man and a woman looking at a cell phone together](./images/phone-together.jpg)
+![A man and a woman looking at a cell phone together](../images/phone-together.jpg)
 *A man and a woman looking at a cell phone.*
 
 ## Bringing the culture of sharing to everyone
