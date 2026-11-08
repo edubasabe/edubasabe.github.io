@@ -53,7 +53,7 @@ const en = {
     tags: "Tags",
     aboutAuthor: "About the author",
     authorBlurb:
-      "Senior Frontend Engineer from Venezuela, building fast and accessible websites and web apps with React, Next.js and Astro.",
+      "Senior Frontend Engineer building fast and accessible websites and web apps with React, Next.js and Astro.",
     moreAboutMe: "More about me",
     allPosts: "All posts",
     aboutLink: (name: string) => `About ${name}`,
@@ -110,7 +110,7 @@ const es: typeof en = {
     tags: "Etiquetas",
     aboutAuthor: "Sobre el autor",
     authorBlurb:
-      "Ingeniero frontend senior de Venezuela. Creo sitios y aplicaciones web rápidos y accesibles con React, Next.js y Astro.",
+      "Ingeniero frontend senior. Creo sitios y aplicaciones web rápidos y accesibles con React, Next.js y Astro.",
     moreAboutMe: "Más sobre mí",
     allPosts: "Todos los artículos",
     aboutLink: (name: string) => `Sobre ${name}`,

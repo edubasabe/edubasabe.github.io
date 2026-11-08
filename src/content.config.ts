@@ -48,7 +48,8 @@ const pages = defineCollection({
     subheading: z.string().optional(),
     /** Rotating words in the home hero */
     words: z.array(z.string()).optional(),
-    techStack: z.array(z.string()).optional(),
+    /** Grouped tech stack chips on the About page */
+    techStack: z.array(z.object({ title: z.string(), items: z.array(z.string()) })).optional(),
   }),
 })
 

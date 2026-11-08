@@ -42,13 +42,20 @@ const { Content } = await render(page)
             <h2 id="tech-stack" class="mb-4 text-lg font-semibold tracking-tight sm:text-xl">
               💻 {t.about.techStack}
             </h2>
-            <ul class="flex flex-wrap gap-2">
-              {data.techStack.map((tech) => (
-                <li class="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700">
-                  {tech}
-                </li>
+            <div class="space-y-5">
+              {data.techStack.map((group) => (
+                <div>
+                  <h3 class="mb-2 text-sm font-medium text-gray-500">{group.title}</h3>
+                  <ul class="flex flex-wrap gap-2">
+                    {group.items.map((tech) => (
+                      <li class="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700">
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </section>
         )
       }
