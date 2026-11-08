@@ -1,5 +1,5 @@
 export const SITE = {
-  url: "https://edubasabe.github.io",
+  url: "https://edubasabe.com",
   name: "ebasabe",
   author: "David Basabe",
   handle: "@edubasabe",

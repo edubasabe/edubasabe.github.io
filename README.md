@@ -1,6 +1,6 @@
-# edubasabe.github.io
+# edubasabe.com
 
-Personal portfolio of David Basabe, built with [Astro](https://astro.build) 7, Tailwind CSS 4 and [Bun](https://bun.sh). Deployed to GitHub Pages on every push to `master`.
+Personal portfolio of David Basabe (live at <https://edubasabe.com>; `edubasabe.github.io` redirects there), built with [Astro](https://astro.build) 7, Tailwind CSS 4 and [Bun](https://bun.sh). Deployed to GitHub Pages on every push to `master`.
 
 ## Commands
 

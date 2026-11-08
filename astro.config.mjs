@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap"
 import icon from "astro-icon"
 import tailwindcss from "@tailwindcss/vite"
 
-const SITE = "https://edubasabe.github.io"
+const SITE = "https://edubasabe.com"
 
 /** True when the language has at least one non-draft post (drafts only show in dev). */
 function hasPublishedPosts(locale) {
