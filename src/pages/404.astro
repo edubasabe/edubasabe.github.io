@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<!-- GitHub Pages serves this file for every unknown URL (English and Spanish). Kept out of the index. -->
+<Layout
+  title="Page not found | Página no encontrada"
+  description="The page you are looking for does not exist. / La página que buscas no existe."
+  noindex
+  alternates={{ en: "/404" }}
+>
+  <div class="container-page py-24 text-center sm:py-32">
+    <p class="text-sm font-semibold tracking-wide text-blue-600">404</p>
+    <h1 class="mt-3 text-3xl font-bold tracking-tight text-balance text-gray-900 sm:text-4xl">
+      Page not found
+    </h1>
+    <p class="mt-3 text-gray-600">The page you are looking for doesn't exist or has moved.</p>
+    <div class="mt-6 flex flex-wrap justify-center gap-3">
+      <a href="/" class="btn-primary">Back to home</a>
+      <a href="/blog" class="btn-secondary">Read the blog</a>
+    </div>
+
+    <hr class="mx-auto my-10 max-w-xs border-gray-200" />
+
+    <h2 class="text-xl font-semibold tracking-tight text-gray-900" lang="es">Página no encontrada</h2>
+    <p class="mt-2 text-gray-600" lang="es">La página que buscas no existe o ha cambiado de lugar.</p>
+    <div class="mt-5 flex flex-wrap justify-center gap-3" lang="es">
+      <a href="/es" class="btn-secondary">Volver al inicio</a>
+      <a href="/es/blog" class="btn-secondary">Leer el blog</a>
+    </div>
+  </div>
+</Layout>

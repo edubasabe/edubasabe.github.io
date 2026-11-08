@@ -2,12 +2,14 @@
 import Layout from "../../layouts/Layout.astro"
 import ProjectList from "../../components/ProjectList.astro"
 import PageHeader from "../../components/PageHeader.astro"
+import { breadcrumbs } from "../../lib/schema"
 import { getPage, getProjects } from "../../lib/content"
-import { getLocale, localePaths, localizedPath } from "../../i18n/utils"
+import { getLocale, localePaths, localizedPath, useUI } from "../../i18n/utils"
 
 export const getStaticPaths = () => localePaths()
 
 const locale = getLocale(Astro)
+const t = useUI(locale)
 const { data } = await getPage("portfolio", locale)
 const projects = await getProjects()
 const pageUrl = new URL(localizedPath("/portfolio", locale), Astro.site).href
@@ -40,6 +42,10 @@ const pageUrl = new URL(localizedPath("/portfolio", locale), Astro.site).href
         })),
       },
     },
+    breadcrumbs(Astro.site!, [
+      { name: t.nav.home, path: localizedPath("/", locale) },
+      { name: t.nav.portfolio, path: localizedPath("/portfolio", locale) },
+    ]),
   ]}
 >
   <div class="container-page pt-8 sm:pt-12 lg:pt-16">

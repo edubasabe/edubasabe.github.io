@@ -45,7 +45,7 @@ const blogUrl = new URL(localizedPath("/blog", locale), site).href
     },
     breadcrumbs(site, [
       { name: t.nav.home, path: localizedPath("/", locale) },
-      { name: data.title, path: localizedPath("/blog", locale) },
+      { name: data.heading ?? data.title, path: localizedPath("/blog", locale) },
     ]),
   ]}
 >

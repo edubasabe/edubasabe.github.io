@@ -1,5 +1,5 @@
 ---
-title: "Sobre mí"
+title: "Sobre David Basabe, Ingeniero Frontend Senior"
 description: "Conoce a David Basabe, ingeniero frontend senior con más de 8 años creando apps web confiables con React, Next.js y TypeScript, y pasión por la IA."
 heading: "¡Hola! 👋 Soy David Basabe"
 subheading: "Ingeniero Frontend Senior"

@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "About David Basabe, Senior Frontend Engineer"
 description: "Meet David Basabe, a Senior Frontend Engineer with 8+ years building reliable web apps with React, Next.js and TypeScript, and a passion for AI."
 heading: "Hi! 👋 I'm David Basabe"
 subheading: "Senior Frontend Engineer"

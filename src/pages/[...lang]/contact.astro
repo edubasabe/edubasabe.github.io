@@ -3,21 +3,32 @@ import { Image } from "astro:assets"
 import Layout from "../../layouts/Layout.astro"
 import PageHeader from "../../components/PageHeader.astro"
 import ContactImage from "../../assets/images/contact.jpeg"
+import { breadcrumbs } from "../../lib/schema"
 import { getPage } from "../../lib/content"
 import { SITE } from "../../consts"
-import { getLocale, localePaths, useUI } from "../../i18n/utils"
+import { getLocale, localePaths, localizedPath, useUI } from "../../i18n/utils"
 
 export const getStaticPaths = () => localePaths()
 
 const locale = getLocale(Astro)
 const t = useUI(locale).contact
+const nav = useUI(locale).nav
 const { data } = await getPage("contact", locale)
 
 const field =
   "block w-full rounded-lg border border-gray-300 bg-white px-3.5 text-base text-gray-900 placeholder:text-gray-400 transition-colors hover:border-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none"
 ---
 
-<Layout title={data.title} description={data.description}>
+<Layout
+  title={data.title}
+  description={data.description}
+  schema={[
+    breadcrumbs(Astro.site!, [
+      { name: nav.home, path: localizedPath("/", locale) },
+      { name: nav.contact, path: localizedPath("/contact", locale) },
+    ]),
+  ]}
+>
   <div class="container-page pt-8 sm:pt-12 lg:pt-16">
     <PageHeader title={data.heading ?? data.title} subtitle={data.subheading} />
 

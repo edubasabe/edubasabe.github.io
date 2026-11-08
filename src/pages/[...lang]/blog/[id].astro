@@ -38,11 +38,13 @@ const locale = getLocale(Astro)
 const t = useUI(locale)
 const { Content } = await render(post)
 const { words, minutes } = readingTime(post)
-const blogTitle = (await getPage("blog", locale)).data.title
+const blogPage = (await getPage("blog", locale)).data
+const blogTitle = blogPage.heading ?? blogPage.title
 
 const site = Astro.site!
 const url = new URL(postPath(post, locale), site).href
 const personId = new URL("/#person", site).href
+const blogUrl = new URL(localizedPath("/blog", locale), site).href
 const modified = data.updatedDate ?? data.pubDate
 const alternates = await getPostAlternates(post)
 ---
@@ -62,7 +64,7 @@ const alternates = await getPostAlternates(post)
       "@type": "BlogPosting",
       "@id": `${url}#article`,
       mainEntityOfPage: { "@id": `${url}#webpage` },
-      isPartOf: { "@id": `${new URL(localizedPath("/blog", locale), site).href}#blog` },
+      isPartOf: { "@id": `${blogUrl}#blog` },
       headline: data.title,
       description: data.description,
       image: [new URL(data.cover.src, site).href],
@@ -75,6 +77,14 @@ const alternates = await getPostAlternates(post)
       wordCount: words,
       timeRequired: `PT${minutes}M`,
       inLanguage: localeMeta[locale].hreflang,
+    },
+    {
+      "@type": "Blog",
+      "@id": `${blogUrl}#blog`,
+      url: blogUrl,
+      name: t.blog.rssTitle,
+      inLanguage: localeMeta[locale].hreflang,
+      author: { "@id": personId },
     },
     breadcrumbs(site, [
       { name: t.nav.home, path: localizedPath("/", locale) },

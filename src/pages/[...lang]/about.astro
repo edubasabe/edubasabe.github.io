@@ -2,6 +2,7 @@
 import { render } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
 import PageHeader from "../../components/PageHeader.astro"
+import { breadcrumbs } from "../../lib/schema"
 import { getPage } from "../../lib/content"
 import { getLocale, localePaths, localizedPath, useUI } from "../../i18n/utils"
 
@@ -26,6 +27,10 @@ const { Content } = await render(page)
       mainEntity: { "@id": new URL("/#person", Astro.site).href },
       name: t.about.pageName,
     },
+    breadcrumbs(Astro.site!, [
+      { name: t.nav.home, path: localizedPath("/", locale) },
+      { name: t.nav.about, path: localizedPath("/about", locale) },
+    ]),
   ]}
 >
   <div class="container-page pt-8 sm:pt-12 lg:pt-16">

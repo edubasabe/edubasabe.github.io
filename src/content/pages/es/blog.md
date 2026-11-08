@@ -1,6 +1,6 @@
 ---
-title: "Blog"
-description: "Artículos de David Basabe sobre ingeniería frontend, React, Astro, rendimiento web y cómo crear sitios rápidos y accesibles."
+title: "Blog: guías de desarrollo web por David Basabe"
+description: "Guías prácticas sobre sitios web, dominio y hosting, SSL, copias de seguridad, optimización de imágenes y desarrollo web, por David Basabe."
 heading: "Blog"
-subheading: "Notas sobre ingeniería frontend, rendimiento web y desarrollo para la web."
+subheading: "Guías prácticas sobre sitios web, hosting, rendimiento y desarrollo para la web."
 ---

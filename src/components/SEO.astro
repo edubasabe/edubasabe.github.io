@@ -1,7 +1,8 @@
 ---
 import { getImage } from "astro:assets"
 import type { ImageMetadata } from "astro"
-import DefaultOgImage from "../assets/images/cover.jpg"
+import DefaultOgImage from "../assets/images/og-default.jpg"
+import avatar from "../assets/images/avatar.jpg"
 import { SITE } from "../consts"
 import { defaultLocale, localeMeta, locales, type Locale } from "../i18n/ui"
 import { cleanPath, localizedPath, useUI, type Alternates } from "../i18n/utils"
@@ -46,12 +47,15 @@ const abs = (path: string) => new URL(path, site).href
 const alternateEntries = locales.filter((l) => alternates[l]).map((l) => [l, abs(alternates[l]!)] as const)
 const xDefault = (alternateEntries.find(([l]) => l === defaultLocale) ?? alternateEntries[0])?.[1]
 const canonical = new URL(cleanPath(Astro.url.pathname), site).href
-const fullTitle = title.includes(SITE.author) ? title : `${title} | ${SITE.author}`
+// Append the site name only when the result still fits in a SERP title (~60 chars)
+const withSite = `${title} | ${SITE.author}`
+const fullTitle = title.includes(SITE.author) || withSite.length > 60 ? title : withSite
 
 const ogAlt = imageAlt ?? `${SITE.author} — ${t.jobTitle}`
 const og = await getImage({ src: image, width: 1200, height: 630, format: "jpg" })
 const ogImage = new URL(og.src, site).href
 
+const personImage = await getImage({ src: avatar, width: 400, height: 400, format: "jpg" })
 const personId = `${site.href}#person`
 const websiteId = `${abs(localizedPath("/", locale))}#website`
 
@@ -64,6 +68,7 @@ const jsonLd = {
       name: SITE.author,
       alternateName: SITE.handle,
       url: site.href,
+      image: abs(personImage.src),
       jobTitle: t.jobTitle,
       email: `mailto:${SITE.email}`,
       knowsAbout: SITE.knowsAbout,

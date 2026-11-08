@@ -1,6 +1,6 @@
 ---
-title: "Blog"
-description: "Articles by David Basabe about frontend engineering, React, Astro, web performance and building fast, accessible websites."
+title: "Blog: Web Development Guides by David Basabe"
+description: "Practical guides on websites, domains and hosting, SSL, backups, image optimization and web development, by Senior Frontend Engineer David Basabe."
 heading: "Blog"
-subheading: "Notes on frontend engineering, web performance and building for the web."
+subheading: "Practical guides to websites, hosting, performance and building for the web."
 ---
