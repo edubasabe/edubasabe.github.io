@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets"
+import avatar from "../assets/images/avatar.jpg"
+
+interface Props {
+  /** Rendered size in px (the image is generated at 2x for sharp retina screens) */
+  size?: number
+  class?: string
+}
+
+const { size = 48, class: className } = Astro.props
+---
+
+<Image
+  src={avatar}
+  alt=""
+  width={size}
+  height={size}
+  densities={[2, 3]}
+  loading="lazy"
+  decoding="async"
+  style={`width:${size}px;height:${size}px`}
+  class:list={["shrink-0 self-start rounded-full bg-gray-100 object-cover", className]}
+/>

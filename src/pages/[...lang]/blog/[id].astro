@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components"
 import { render } from "astro:content"
 import Layout from "../../../layouts/Layout.astro"
 import ShareBar from "../../../components/ShareBar.astro"
+import Avatar from "../../../components/Avatar.astro"
 import {
   formatDate,
   getPage,
@@ -111,10 +112,10 @@ const alternates = await getPostAlternates(post)
         <div class="mt-6 flex items-center gap-3">
           <a
             href={localizedPath("/about", locale)}
-            class="grid size-11 shrink-0 place-items-center rounded-full bg-blue-600 text-sm font-semibold text-white"
+            class="shrink-0"
             aria-label={t.blog.aboutLink(SITE.author)}
           >
-            DB
+            <Avatar size={44} />
           </a>
           <div class="min-w-0">
             <a href={localizedPath("/about", locale)} rel="author" class="font-semibold text-gray-900 hover:underline">
@@ -168,9 +169,7 @@ const alternates = await getPostAlternates(post)
       }
 
       <aside class="mt-12 flex gap-4 rounded-2xl border border-gray-200 p-5 sm:p-6" aria-label={t.blog.aboutAuthor}>
-        <div class="grid size-12 shrink-0 place-items-center rounded-full bg-blue-600 font-semibold text-white" aria-hidden="true">
-          DB
-        </div>
+        <Avatar size={48} />
         <div>
           <p class="font-semibold text-gray-900">{SITE.author}</p>
           <p class="mt-1 text-sm text-gray-600">{t.blog.authorBlurb}</p>
