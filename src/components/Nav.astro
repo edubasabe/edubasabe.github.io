@@ -15,7 +15,9 @@ const { links } = Astro.props
 const locale = getLocale(Astro)
 const t = useUI(locale)
 const current = cleanPath(Astro.url.pathname)
-const isCurrent = (href: string) => (current === href ? "page" : undefined)
+// Sections stay highlighted on their sub-pages (e.g. /blog/my-post highlights Blog)
+const isCurrent = (href: string, section = false) =>
+  current === href || (section && current.startsWith(`${href}/`)) ? "page" : undefined
 const home = localizedPath("/", locale)
 const contact = localizedPath("/contact", locale)
 ---
@@ -33,7 +35,7 @@ const contact = localizedPath("/contact", locale)
         <li>
           <a
             href={href}
-            aria-current={isCurrent(href)}
+            aria-current={isCurrent(href, true)}
             class="rounded-md px-3 py-2 font-medium text-gray-600 transition-colors hover:text-gray-900 aria-[current=page]:text-gray-900"
           >
             {label}
@@ -86,7 +88,7 @@ const contact = localizedPath("/contact", locale)
           <li>
             <a
               href={href}
-              aria-current={isCurrent(href)}
+              aria-current={isCurrent(href, href !== home)}
               class="flex min-h-12 items-center text-2xl font-semibold tracking-tight text-gray-500 aria-[current=page]:text-gray-900"
             >
               {label}
