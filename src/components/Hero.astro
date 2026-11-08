@@ -1,26 +1,24 @@
 ---
 interface Props {
   title: string
-  variable: string[]
+  words: string[]
 }
 
-const { title, variable } = Astro.props
+const { title, words } = Astro.props
 ---
 
-<div class="flex-[2] mb-4 shrink-0 px-4 xl:px-14 flex items-center">
-  <div
-    class="font-extrabold text-5xl md:text-7xl [text-wrap:balance] bg-clip-text text-transparent bg-gradient-to-r from-slate-800/80 to-50% to-slate-900 tracking-tight"
+<div class="mb-4 flex flex-2 shrink-0 items-center px-4 xl:px-14">
+  <h1
+    class="bg-linear-to-r from-slate-800/80 to-slate-900 to-50% bg-clip-text text-5xl font-extrabold tracking-tight text-balance text-transparent md:text-7xl"
   >
-    {title}&nbsp;
-    <span
-      class="text-blue-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] md:h-[calc(theme(fontSize.7xl)*theme(lineHeight.tight))] overflow-hidden"
+    {title}&nbsp;<span class="sr-only">{words.join(", ")}</span><span
+      aria-hidden="true"
+      class="inline-flex h-[calc(var(--text-5xl)*var(--leading-tight))] flex-col overflow-hidden text-blue-500 md:h-[calc(var(--text-7xl)*var(--leading-tight))]"
     >
-      <ul
-        class="block animate-text-slide-5 text-left leading-tight [&_li]:block"
-      >
-        {variable.map((word) => <li class="tracking-tight">{word}</li>)}
-        <li aria-hidden="true" class="tracking-tight">project</li>
-      </ul>
+      <span class="animate-text-slide-5 block text-left leading-tight">
+        {words.map((word) => <span class="block tracking-tight">{word}</span>)}
+        <span class="block tracking-tight">{words[0]}</span>
+      </span>
     </span>
-  </div>
+  </h1>
 </div>

@@ -2,19 +2,11 @@
 import Nav from "./Nav.astro"
 ---
 
-<section
-  class="sticky z-50 w-full text-gray-900 bg-white bg-opacity-50 dark:bg-dark dark:text-gray-100 backdrop-filter backdrop-blur-lg dark:bg-opacity-50"
->
+<header class="sticky top-0 z-50 w-full bg-white/50 text-gray-900 backdrop-blur-lg">
   <Nav
     links={[
-      {
-        href: "/about",
-        label: "About",
-      },
-      {
-        href: "/portfolio",
-        label: "Portfolio",
-      },
+      { href: "/about", label: "About" },
+      { href: "/portfolio", label: "Portfolio" },
     ]}
   />
-</section>
+</header>

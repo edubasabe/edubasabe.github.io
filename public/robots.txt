@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://edubasabe.github.io/sitemap-index.xml

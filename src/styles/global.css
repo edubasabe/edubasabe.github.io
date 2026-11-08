@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-text-slide-5: text-slide-5 12.5s cubic-bezier(0.83, 0, 0.17, 1) infinite;
+
+  @keyframes text-slide-5 {
+    0%, 16% { transform: translateY(0%); }
+    20%, 36% { transform: translateY(-16.66%); }
+    40%, 56% { transform: translateY(-33.33%); }
+    60%, 76% { transform: translateY(-50%); }
+    80%, 96% { transform: translateY(-66.66%); }
+    100% { transform: translateY(-83.33%); }
+  }
+}
+
+/* Tailwind v4 changed the default border color to currentColor; keep the v3 look */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-text-slide-5 {
+    animation: none;
+  }
+}
+
+/* Markdown body styles (no typography plugin needed) */
+.prose-content h2 {
+  @apply mb-2 flex items-center gap-x-2 text-xl font-bold;
+}
+.prose-content p {
+  @apply mb-4;
+}
+.prose-content a {
+  @apply text-blue-600 underline underline-offset-2 hover:text-blue-800;
+}

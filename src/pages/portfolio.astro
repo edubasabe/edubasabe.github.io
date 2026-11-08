@@ -1,14 +1,45 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import Websites from "../components/Websites.astro"
+import ProjectList from "../components/ProjectList.astro"
+import { getPage, getProjects } from "../lib/content"
+
+const { data } = await getPage("portfolio")
+const projects = await getProjects()
+const pageUrl = new URL("/portfolio", Astro.site).href
 ---
 
-<Layout title="Portfolio" class="md:min-h-screen">
-  <main class="max-w-3xl mx-auto px-4 lg:pt-6">
-    <h2 class="text-2xl font-semibold mb-4">
-      <span class="text-3xl">🗂</span>
-       Portfolio
-    </h2>
-    <Websites />
+<Layout
+  title={data.title}
+  description={data.description}
+  image={projects[0]?.data.cover}
+  imageAlt={projects[0]?.data.coverAlt}
+  class="md:min-h-screen"
+  schema={[
+    {
+      "@type": "CollectionPage",
+      "@id": `${pageUrl}#collection`,
+      url: pageUrl,
+      name: data.title,
+      description: data.description,
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: projects.length,
+        itemListElement: projects.map(({ data: p }, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          item: {
+            "@type": "WebSite",
+            name: p.name,
+            url: p.url,
+            creator: { "@id": new URL("/#person", Astro.site).href },
+          },
+        })),
+      },
+    },
+  ]}
+>
+  <main id="main" class="mx-auto max-w-6xl px-4 lg:pt-6 md:px-0">
+    <h1 class="mb-4 text-2xl font-semibold">{data.heading}</h1>
+    <ProjectList projects={projects} />
   </main>
 </Layout>

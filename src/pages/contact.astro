@@ -2,15 +2,22 @@
 import Layout from "../layouts/Layout.astro"
 import ContactImage from "../assets/images/contact.jpeg"
 import { Image } from "astro:assets"
+import { getPage } from "../lib/content"
+
+const { data } = await getPage("contact")
 ---
 
-<Layout title="Contact" class="md:min-h-screen flex flex-col">
-  <main class="px-4 relative">
+<Layout
+  title={data.title}
+  description={data.description}
+  class="md:min-h-screen flex flex-col"
+>
+  <main id="main" class="px-4 relative">
     <div class="mx-auto xl:max-w-6xl">
       <div class="pb-6 flex flex-col gap-y-1">
-        <h2 class="text-3xl font-bold">Let's get in touch</h2>
+        <h1 class="text-3xl font-bold">{data.heading}</h1>
         <p class="md:text-lg md:font-light text-slate-500">
-          Have a question, need help, or interested in getting started in Web?
+          {data.subheading}
         </p>
       </div>
       <div class="flex flex-col md:flex-row gap-x-4">
@@ -28,7 +35,9 @@ import { Image } from "astro:assets"
             <label for="name" class="font-medium">Name</label>
             <input
               type="text"
+              id="name"
               name="name"
+              autocomplete="name"
               class="border rounded-md h-10 p-2 font-normal hover:border-slate-300"
               placeholder="Your name"
               required
@@ -38,7 +47,9 @@ import { Image } from "astro:assets"
             <label for="email" class="font-medium">Email</label>
             <input
               type="email"
+              id="email"
               name="email"
+              autocomplete="email"
               class="border rounded-md h-10 p-2 font-normal hover:border-slate-300"
               placeholder="Your email"
               required
@@ -47,6 +58,7 @@ import { Image } from "astro:assets"
           <div class="flex flex-col gap-y-1">
             <label for="message" class="font-medium">Message</label>
             <textarea
+              id="message"
               name="message"
               class="border rounded-md p-2 h-20 font-normal hover:border-slate-300"
               placeholder="Your message"
@@ -55,18 +67,19 @@ import { Image } from "astro:assets"
           <div class="h-captcha" data-captcha="true"></div>
           <button
             type="submit"
-            class="h-10 font-semibold rounded-md bg-blue-600 text-white"
+            class="h-10 font-semibold rounded-md bg-blue-600 text-white hover:bg-blue-700"
             >Submit</button
           >
         </form>
         <Image
           src={ContactImage}
-          alt={"Contact Image"}
-          class={"hidden sm:block flex-1 rounded-lg lg:rounded-3xl lg:border-none lg:shadow-none shadow-md border overflow-hidden h-[420px]"}
+          alt="Hands typing on a laptop keyboard"
+          widths={[480, 960]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          class={"hidden sm:block flex-1 rounded-lg lg:rounded-3xl lg:border-none lg:shadow-none shadow-md border overflow-hidden h-[420px] object-cover"}
         />
       </div>
     </div>
   </main>
 </Layout>
-<script is:inline src="https://web3forms.com/client/script.js" async defer
-></script>
+<script is:inline src="https://web3forms.com/client/script.js" async defer></script>

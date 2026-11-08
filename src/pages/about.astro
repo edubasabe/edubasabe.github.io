@@ -1,71 +1,48 @@
 ---
-import { Image } from "astro:assets"
+import { render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
-import Cover from "../assets/images/cover.jpg"
+import { getPage } from "../lib/content"
+import { SITE } from "../consts"
+
+const page = await getPage("about")
+const { data } = page
+const { Content } = await render(page)
 ---
 
-<Layout title="About" class="md:min-h-screen">
-  <main class="max-w-3xl mx-auto pt-6">
-    <h2 class="text-2xl font-semibold">
-      Hi!
-      <span role="img" aria-label="Hand shake">👋</span>{" "}
-       I'm David Basabe (@edubasabe)
-    </h2>
-    <p class="font-semibold mb-4">
-      Software Developer from Venezuela <span
-        role="img"
-        aria-label="Venezuelan flag">🇻🇪</span
-      >
-    </p>
+<Layout
+  title={data.title}
+  description={data.description}
+  type="profile"
+  class="md:min-h-screen"
+  schema={[
+    {
+      "@type": "ProfilePage",
+      "@id": new URL("/about#profile", Astro.site).href,
+      url: new URL("/about", Astro.site).href,
+      mainEntity: { "@id": new URL("/#person", Astro.site).href },
+      name: `About ${SITE.author}`,
+    },
+  ]}
+>
+  <main id="main" class="mx-auto max-w-3xl px-4 pt-6 md:px-0">
+    <h1 class="text-2xl font-semibold">{data.heading}</h1>
+    <p class="mb-4 font-semibold">{data.subheading}</p>
 
-    <h3 class="text-xl font-bold mb-2 flex items-center gap-x-2">
-      <span class="text-3xl">🧑‍💻️</span>
-       Short bio
-    </h3>
-    <p class="mb-4">
-      With over 6 years of experience, I am a highly skilled Senior Frontend
-      Developer adept at constructing robust and scalable web applications,
-      primarily employing React. My expertise lies in front-end development,
-      rooted in a firm grasp of user experience design principles. On the back
-      end, I have honed my proficiency in utilizing Node.js as the core
-      technology, along with both SQL and NoSQL databases. I possess hands-on
-      experience in Unit testing through Jest, Enzyme, and Testing Library. An
-      enthusiastic collaborator, I am always eager to engage, learn, and
-      contribute effectively within a team dynamic.
-    </p>
+    <article class="prose-content">
+      <Content />
+    </article>
 
-    <h3 class="text-xl font-bold mb-2 flex items-center gap-x-2">
-      <span class="text-3xl">💻</span>
-       Tech Stack
-    </h3>
-    <ul class="flex gap-x-4 mb-4">
-      <li>Next.js</li>
-      <li>Next Auth</li>
-      <li>Typescript</li>
-      <li>TailwindCSS</li>
-      <li>tRPC</li>
-      <li>Prisma</li>
-      <li>Node.js</li>
-      <li>PostgreSQL</li>
-    </ul>
-
-    <h3 class="text-xl font-bold mb-2 flex items-center gap-x-2">
-      <span class="text-3xl">🍻</span> Let's Connect
-    </h3>
-    <p>
-      I'm excited to connect with others via <a
-        href="mailto:ebasabedesign@gmail.com">email</a
-      > and <a href="https://twitter.com/edubasabe">Twitter</a> to chat about
-      projects and ideas. Currently, I'm not taking on freelance projects, but I
-      am open to hearing about potential opportunities, discussing them with you
-      and then potentially collaborating if it's a good fit.
-    </p>
-
-    <!-- <Image
-      src={Cover}
-      alt={"Two women in a computer"}
-      class="flex-1 my-4 max-w-[90vw] rounded-2xl lg:rounded-l-3xl max-h-[320px] xl:max-h-[420px] xl:rounded-l-3xl 2xl:max-h-[720px]"
-      loading="eager"
-    /> -->
+    {
+      data.techStack && (
+        <section aria-labelledby="tech-stack">
+          <h2 id="tech-stack" class="mb-2 flex items-center gap-x-2 text-xl font-bold">
+            <span aria-hidden="true">💻</span> Tech Stack
+          </h2>
+          <ul class="mb-4 flex flex-wrap gap-x-4 gap-y-1">
+            {data.techStack.map((tech) => <li>{tech}</li>)}
+          </ul>
+        </section>
+      )
+    }
   </main>
 </Layout>
