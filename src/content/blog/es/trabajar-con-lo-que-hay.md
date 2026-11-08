@@ -1,7 +1,7 @@
 ---
 title: "Trabajar con lo que hay"
 description: "Conocer los fundamentos de nuestro oficio nos ayuda a adaptarnos a distintas herramientas sin perder de vista la calidad del trabajo."
-pubDate: 2017-05-24
+pubDate: 2017-07-24
 cover: "../images/trabajar-con-lo-que-hay.jpg"
 coverAlt: "Un escritorio de trabajo con computadora portátil, teclado y un libro"
 tags: ["creatividad", "herramientas"]
