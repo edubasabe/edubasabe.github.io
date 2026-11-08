@@ -1,0 +1,64 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import PageHeader from "../../components/PageHeader.astro"
+import PostCard from "../../components/PostCard.astro"
+import { getPage, getPosts } from "../../lib/content"
+import { breadcrumbs } from "../../lib/schema"
+import { SITE } from "../../consts"
+
+const { data } = await getPage("blog")
+const posts = await getPosts()
+const site = Astro.site!
+const blogUrl = new URL("/blog", site).href
+---
+
+<Layout
+  title={data.title}
+  description={data.description}
+  image={posts[0]?.data.cover}
+  imageAlt={posts[0]?.data.coverAlt}
+  noindex={posts.length === 0}
+  schema={[
+    {
+      "@type": "Blog",
+      "@id": `${blogUrl}#blog`,
+      url: blogUrl,
+      name: `${SITE.author} — Blog`,
+      description: data.description,
+      inLanguage: "en",
+      author: { "@id": new URL("/#person", site).href },
+      blogPost: posts.map((post) => ({
+        "@type": "BlogPosting",
+        headline: post.data.title,
+        description: post.data.description,
+        url: new URL(`/blog/${post.id}`, site).href,
+        datePublished: post.data.pubDate.toISOString(),
+        dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+        author: { "@id": new URL("/#person", site).href },
+      })),
+    },
+    breadcrumbs(site, [
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+    ]),
+  ]}
+>
+  <div class="container-page pt-8 sm:pt-12 lg:pt-16">
+    <PageHeader title={data.heading ?? data.title} subtitle={data.subheading} />
+    {
+      posts.length > 0 ? (
+        <ul class="grid gap-10 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-14">
+          {posts.map((post, i) => (
+            <li>
+              <PostCard post={post} eager={i < 2} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="rounded-xl border border-dashed border-gray-300 p-8 text-center text-gray-500">
+          No posts yet — check back soon.
+        </p>
+      )
+    }
+  </div>
+</Layout>

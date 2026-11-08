@@ -1,0 +1,74 @@
+---
+import { Icon } from "astro-icon/components"
+
+interface Props {
+  url: string
+  title: string
+}
+
+const { url, title } = Astro.props
+const u = encodeURIComponent(url)
+const t = encodeURIComponent(title)
+const links = [
+  { label: "Share on X", icon: "mdi:twitter", href: `https://twitter.com/intent/tweet?url=${u}&text=${t}` },
+  { label: "Share on LinkedIn", icon: "mdi:linkedin", href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}` },
+  { label: "Share on Facebook", icon: "mdi:facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${u}` },
+]
+---
+
+<div
+  class="pointer-events-none sticky inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] mt-12 flex justify-center px-4"
+>
+  <div
+    class="pointer-events-auto flex items-center gap-1 rounded-full border border-gray-200 bg-white/90 px-2 py-1 shadow-lg backdrop-blur"
+    role="group"
+    aria-label="Share this article"
+  >
+    <button
+      type="button"
+      data-share
+      data-url={url}
+      data-title={title}
+      class="flex h-11 items-center gap-2 rounded-full px-3 text-sm font-medium text-gray-700 hover:text-gray-900"
+    >
+      <Icon name="mdi:share-variant-outline" class="size-5" aria-hidden="true" />
+      <span data-share-label>Share</span>
+    </button>
+    <span class="h-4 border-l border-gray-200" aria-hidden="true"></span>
+    {
+      links.map(({ label, icon, href }) => (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          title={label}
+          class="grid size-11 place-items-center rounded-full text-gray-500 hover:text-gray-900"
+        >
+          <Icon name={icon} class="size-5" aria-hidden="true" />
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  // Native share sheet on iOS/Android; copy link everywhere else.
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-share]")) {
+    const label = button.querySelector("[data-share-label]")!
+    button.addEventListener("click", async () => {
+      const { url = location.href, title = document.title } = button.dataset
+      if (navigator.share) {
+        try {
+          await navigator.share({ url, title })
+        } catch {
+          /* user cancelled */
+        }
+        return
+      }
+      await navigator.clipboard.writeText(url)
+      label.textContent = "Link copied"
+      setTimeout(() => (label.textContent = "Share"), 2000)
+    })
+  }
+</script>

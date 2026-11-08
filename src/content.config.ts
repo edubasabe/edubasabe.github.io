@@ -17,6 +17,24 @@ const projects = defineCollection({
     }),
 })
 
+/** Blog articles — one markdown file per post in src/content/blog */
+const blog = defineCollection({
+  loader: glob({ base: "./src/content/blog", pattern: "**/*.md" }),
+  schema: ({ image }) =>
+    z.object({
+      /** Keep under ~60 characters so it isn't truncated in search results */
+      title: z.string().max(70),
+      description: z.string().max(160),
+      pubDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
+      cover: image(),
+      coverAlt: z.string(),
+      tags: z.array(z.string()).default([]),
+      /** Drafts are visible in `bun run dev` but never built for production */
+      draft: z.boolean().default(false),
+    }),
+})
+
 /** Copy and SEO metadata for each site page, in src/content/pages */
 const pages = defineCollection({
   loader: glob({ base: "./src/content/pages", pattern: "**/*.md" }),
@@ -31,4 +49,4 @@ const pages = defineCollection({
   }),
 })
 
-export const collections = { projects, pages }
+export const collections = { projects, pages, blog }

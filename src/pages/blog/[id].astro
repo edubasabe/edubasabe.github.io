@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets"
+import { Icon } from "astro-icon/components"
+import { render } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import ShareBar from "../../components/ShareBar.astro"
+import { formatDate, getPosts, readingTime } from "../../lib/content"
+import { breadcrumbs } from "../../lib/schema"
+import { SITE } from "../../consts"
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }))
+}
+
+const { post } = Astro.props
+const { data } = post
+const { Content } = await render(post)
+const { words, minutes } = readingTime(post)
+
+const site = Astro.site!
+const url = new URL(`/blog/${post.id}`, site).href
+const personId = new URL("/#person", site).href
+const modified = data.updatedDate ?? data.pubDate
+---
+
+<Layout
+  title={data.title}
+  description={data.description}
+  image={data.cover}
+  imageAlt={data.coverAlt}
+  type="article"
+  noindex={data.draft}
+  article={{ publishedTime: data.pubDate, modifiedTime: data.updatedDate, tags: data.tags }}
+  schema={[
+    {
+      "@type": "BlogPosting",
+      "@id": `${url}#article`,
+      mainEntityOfPage: { "@id": `${url}#webpage` },
+      isPartOf: { "@id": new URL("/blog#blog", site).href },
+      headline: data.title,
+      description: data.description,
+      image: [new URL(data.cover.src, site).href],
+      datePublished: data.pubDate.toISOString(),
+      dateModified: modified.toISOString(),
+      author: { "@id": personId },
+      publisher: { "@id": personId },
+      keywords: data.tags,
+      articleSection: data.tags[0],
+      wordCount: words,
+      timeRequired: `PT${minutes}M`,
+      inLanguage: "en",
+    },
+    breadcrumbs(site, [
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" },
+      { name: data.title, path: `/blog/${post.id}` },
+    ]),
+  ]}
+>
+  <article class="container-page pt-6 sm:pt-10 lg:pt-14">
+    <div class="mx-auto max-w-2xl">
+      <nav aria-label="Breadcrumb" class="mb-6 text-sm text-gray-500 sm:mb-8">
+        <ol class="flex min-w-0 items-center gap-1.5">
+          <li><a href="/" class="hover:text-gray-900">Home</a></li>
+          <li aria-hidden="true"><Icon name="mdi:chevron-right" class="size-4" /></li>
+          <li><a href="/blog" class="hover:text-gray-900">Blog</a></li>
+          <li aria-hidden="true"><Icon name="mdi:chevron-right" class="size-4" /></li>
+          <li class="truncate text-gray-900" aria-current="page">{data.title}</li>
+        </ol>
+      </nav>
+
+      {
+        data.draft && (
+          <p class="mb-6 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+            Draft — visible in development only, not built for production.
+          </p>
+        )
+      }
+
+      <header>
+        <h1 class="text-3xl font-bold tracking-tight text-balance text-gray-900 sm:text-4xl">
+          {data.title}
+        </h1>
+        <p class="mt-3 text-lg text-pretty text-gray-600 sm:text-xl">{data.description}</p>
+
+        <div class="mt-6 flex items-center gap-3">
+          <a
+            href="/about"
+            class="grid size-11 shrink-0 place-items-center rounded-full bg-blue-600 text-sm font-semibold text-white"
+            aria-label={`About ${SITE.author}`}
+          >
+            DB
+          </a>
+          <div class="min-w-0">
+            <a href="/about" rel="author" class="font-semibold text-gray-900 hover:underline">
+              {SITE.author}
+            </a>
+            <p class="flex flex-wrap items-center gap-x-2 text-sm text-gray-500">
+              <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate)}</time>
+              <span aria-hidden="true">·</span>
+              <span>{minutes} min read</span>
+              {
+                data.updatedDate && (
+                  <>
+                    <span aria-hidden="true">·</span>
+                    <span>
+                      Updated <time datetime={data.updatedDate.toISOString()}>{formatDate(data.updatedDate)}</time>
+                    </span>
+                  </>
+                )
+              }
+            </p>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <figure class="mx-auto mt-8 max-w-3xl sm:mt-10">
+      <Image
+        src={data.cover}
+        alt={data.coverAlt}
+        widths={[480, 800, 1200, 1600]}
+        sizes="(min-width: 768px) 768px, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="aspect-video w-full rounded-2xl object-cover"
+      />
+    </figure>
+
+    <div class="mx-auto mt-8 max-w-2xl sm:mt-10">
+      <div class="prose-content prose-article">
+        <Content />
+      </div>
+
+      {
+        data.tags.length > 0 && (
+          <ul class="mt-10 flex flex-wrap gap-2" aria-label="Tags">
+            {data.tags.map((tag) => (
+              <li class="rounded-full bg-gray-100 px-3 py-1.5 text-sm text-gray-700">{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+
+      <aside class="mt-12 flex gap-4 rounded-2xl border border-gray-200 p-5 sm:p-6" aria-label="About the author">
+        <div class="grid size-12 shrink-0 place-items-center rounded-full bg-blue-600 font-semibold text-white" aria-hidden="true">
+          DB
+        </div>
+        <div>
+          <p class="font-semibold text-gray-900">{SITE.author}</p>
+          <p class="mt-1 text-sm text-gray-600">
+            {SITE.jobTitle} from {SITE.country}, building fast and accessible websites and web apps with React, Next.js and Astro.
+          </p>
+          <a href="/about" class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:underline">
+            More about me <Icon name="mdi:chevron-right" class="size-4" aria-hidden="true" />
+          </a>
+        </div>
+      </aside>
+
+      <a href="/blog" class="mt-10 inline-flex min-h-11 items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900">
+        <Icon name="mdi:arrow-left" class="size-4" aria-hidden="true" /> All posts
+      </a>
+    </div>
+  </article>
+
+  <ShareBar url={url} title={data.title} />
+</Layout>
