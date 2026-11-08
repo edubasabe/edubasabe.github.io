@@ -9,10 +9,9 @@ interface Props {
     label: string
     href: string
   }[]
-  languages: { locale: string; label: string; short: string; href: string }[]
 }
 
-const { links, languages } = Astro.props
+const { links } = Astro.props
 const locale = getLocale(Astro)
 const t = useUI(locale)
 const current = cleanPath(Astro.url.pathname)
@@ -38,22 +37,6 @@ const contact = localizedPath("/contact", locale)
             class="rounded-md px-3 py-2 font-medium text-gray-600 transition-colors hover:text-gray-900 aria-[current=page]:text-gray-900"
           >
             {label}
-          </a>
-        </li>
-      ))
-    }
-    {
-      languages.map((l) => (
-        <li>
-          <a
-            href={l.href}
-            lang={l.locale}
-            hreflang={l.locale}
-            title={l.label}
-            aria-label={l.label}
-            class="rounded-md px-2 py-2 font-medium text-gray-500 transition-colors hover:text-gray-900"
-          >
-            {l.short}
           </a>
         </li>
       ))
@@ -114,21 +97,6 @@ const contact = localizedPath("/contact", locale)
       <li class="mt-4">
         <a href={contact} class="btn-primary w-full">{t.nav.contact}</a>
       </li>
-      {
-        languages.map((l) => (
-          <li class="mt-2">
-            <a
-              href={l.href}
-              lang={l.locale}
-              hreflang={l.locale}
-              class="flex min-h-12 items-center justify-center gap-2 text-base font-medium text-gray-500"
-            >
-              <Icon name="mdi:translate" class="size-5" aria-hidden="true" />
-              {l.label}
-            </a>
-          </li>
-        ))
-      }
     </ul>
   </div>
 </nav>

@@ -2,11 +2,6 @@
 import Nav from "./Nav.astro"
 import { getLocale, localizedPath, useUI } from "../i18n/utils"
 
-interface Props {
-  languages: { locale: string; label: string; short: string; href: string }[]
-}
-
-const { languages } = Astro.props
 const locale = getLocale(Astro)
 const t = useUI(locale)
 ---
@@ -15,7 +10,6 @@ const t = useUI(locale)
   class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 pt-[env(safe-area-inset-top)] backdrop-blur-lg"
 >
   <Nav
-    languages={languages}
     links={[
       { href: localizedPath("/about", locale), label: t.nav.about },
       { href: localizedPath("/portfolio", locale), label: t.nav.portfolio },
