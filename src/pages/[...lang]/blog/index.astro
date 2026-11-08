@@ -53,7 +53,7 @@ const blogUrl = new URL(localizedPath("/blog", locale), site).href
     <PageHeader title={data.heading ?? data.title} subtitle={data.subheading} />
     {
       posts.length > 0 ? (
-        <ul class="grid gap-10 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-14">
+        <ul class="flex max-w-3xl flex-col gap-10 sm:gap-12">
           {posts.map((post, i) => (
             <li>
               <PostCard post={post} eager={i < 2} />
