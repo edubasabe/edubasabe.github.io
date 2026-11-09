@@ -30,6 +30,7 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       cover: image(),
       coverAlt: z.string(),
+      coverCredit: z.object({ label: z.string(), url: z.url() }).optional(),
       tags: z.array(z.string()).default([]),
       /** Links translations of the same post. Defaults to the file name (slug). */
       translationKey: z.string().optional(),
