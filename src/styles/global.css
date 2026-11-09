@@ -184,9 +184,9 @@ html.dark .btn-secondary,
 html.dark footer .bg-white {
   background-color: #1f2937;
 }
-html.dark .site-logo {
-  filter: brightness(0) invert(1);
-}
+.site-logo-dark { display: none; }
+html.dark .site-logo-light { display: none; }
+html.dark .site-logo-dark { display: block; }
 html.dark .text-blue-600,
 html.dark .prose-content a {
   color: #93c5fd;

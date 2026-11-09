@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets"
 import { Icon } from "astro-icon/components"
-import Logo from "../assets/logo-ebasabe.svg"
+import LogoLight from "../assets/brand-logo-light.png"
+import LogoDark from "../assets/brand-logo-dark.png"
 import { cleanPath, getLocale, localizedPath, useUI } from "../i18n/utils"
 
 interface Props {
@@ -25,7 +26,8 @@ const contact = localizedPath("/contact", locale)
 <nav aria-label={t.nav.label} class="container-page flex h-14 items-center justify-between sm:h-16">
   <a href={home} class="-ml-2 flex min-h-11 items-center px-2">
     <span class="sr-only">{t.nav.logo}</span>
-    <Image src={Logo} alt="" class="site-logo h-5 w-auto" loading="eager" />
+    <Image src={LogoLight} alt="" class="site-logo-light h-7 w-auto" loading="eager" />
+    <Image src={LogoDark} alt="" class="site-logo-dark h-7 w-auto" loading="eager" />
   </a>
 
   <!-- Tablet & desktop -->
@@ -78,7 +80,8 @@ const contact = localizedPath("/contact", locale)
     <div class="container-page flex h-14 items-center justify-between">
       <a href={home} class="-ml-2 flex min-h-11 items-center px-2">
         <span class="sr-only">{t.nav.logo}</span>
-        <Image src={Logo} alt="" class="site-logo h-5 w-auto" />
+        <Image src={LogoLight} alt="" class="site-logo-light h-7 w-auto" loading="eager" />
+        <Image src={LogoDark} alt="" class="site-logo-dark h-7 w-auto" loading="eager" />
       </a>
       <button
         type="button"
