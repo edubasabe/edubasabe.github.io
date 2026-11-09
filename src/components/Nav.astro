@@ -25,7 +25,7 @@ const contact = localizedPath("/contact", locale)
 <nav aria-label={t.nav.label} class="container-page flex h-14 items-center justify-between sm:h-16">
   <a href={home} class="-ml-2 flex min-h-11 items-center px-2">
     <span class="sr-only">{t.nav.logo}</span>
-    <Image src={Logo} alt="" class="h-5 w-auto" loading="eager" />
+    <Image src={Logo} alt="" class="site-logo h-5 w-auto" loading="eager" />
   </a>
 
   <!-- Tablet & desktop -->
@@ -52,6 +52,12 @@ const contact = localizedPath("/contact", locale)
     </li>
   </ul>
 
+  <div class="flex items-center gap-1 sm:ml-2">
+  <button type="button" data-theme-toggle aria-label={t.nav.darkMode} aria-pressed="false" class="grid size-11 place-items-center rounded-lg text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900">
+    <Icon name="lucide:moon" class="theme-moon size-5" aria-hidden="true" />
+    <Icon name="lucide:sun" class="theme-sun size-5" aria-hidden="true" />
+  </button>
+
   <!-- Mobile -->
   <button
     type="button"
@@ -62,6 +68,8 @@ const contact = localizedPath("/contact", locale)
     <Icon name="mdi:menu" class="size-6" aria-hidden="true" />
   </button>
 
+  </div>
+
   <div
     id="mobile-menu"
     popover
@@ -70,7 +78,7 @@ const contact = localizedPath("/contact", locale)
     <div class="container-page flex h-14 items-center justify-between">
       <a href={home} class="-ml-2 flex min-h-11 items-center px-2">
         <span class="sr-only">{t.nav.logo}</span>
-        <Image src={Logo} alt="" class="h-5 w-auto" />
+        <Image src={Logo} alt="" class="site-logo h-5 w-auto" />
       </a>
       <button
         type="button"
@@ -102,3 +110,28 @@ const contact = localizedPath("/contact", locale)
     </ul>
   </div>
 </nav>
+
+<script>
+  const root = document.documentElement
+  const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]")
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+  let preference: string | null = null
+  try { preference = localStorage.getItem("theme") } catch {}
+
+  function applyTheme(dark: boolean) {
+    root.classList.toggle("dark", dark)
+    toggle?.setAttribute("aria-pressed", String(dark))
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#111827" : "#ffffff")
+  }
+
+  applyTheme(root.classList.contains("dark"))
+  toggle?.addEventListener("click", () => {
+    const dark = !root.classList.contains("dark")
+    preference = dark ? "dark" : "light"
+    try { localStorage.setItem("theme", preference) } catch {}
+    applyTheme(dark)
+  })
+  systemTheme.addEventListener("change", (event) => {
+    if (preference !== "light" && preference !== "dark") applyTheme(event.matches)
+  })
+</script>

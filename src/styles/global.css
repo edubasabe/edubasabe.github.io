@@ -154,3 +154,56 @@
 .prose-article hr {
   @apply my-12 border-gray-200;
 }
+
+/* Shared dark palette: the same semantic grays adapt throughout the site. */
+html.dark {
+  color-scheme: dark;
+  --color-gray-50: #1f2937;
+  --color-gray-100: #273445;
+  --color-gray-200: #3b4a5c;
+  --color-gray-300: #526174;
+  --color-gray-400: #a3b0c2;
+  --color-gray-500: #aebacc;
+  --color-gray-600: #c3ccda;
+  --color-gray-700: #d2d9e4;
+  --color-gray-900: #f3f4f6;
+}
+html.dark body,
+html.dark #mobile-menu {
+  background-color: #111827;
+}
+html.dark header {
+  background-color: rgb(17 24 39 / 0.85);
+}
+html.dark .bg-white\/90 {
+  background-color: rgb(31 41 55 / 0.95);
+}
+html.dark input.bg-white,
+html.dark textarea.bg-white,
+html.dark .btn-secondary,
+html.dark footer .bg-white {
+  background-color: #1f2937;
+}
+html.dark .site-logo {
+  filter: brightness(0) invert(1);
+}
+html.dark .text-blue-600,
+html.dark .prose-content a {
+  color: #93c5fd;
+}
+html.dark .prose-content a {
+  text-decoration-color: rgb(147 197 253 / 0.4);
+}
+html.dark .prose-content a:hover {
+  text-decoration-color: #93c5fd;
+}
+html.dark .prose-article pre {
+  color: #f3f4f6;
+}
+.theme-sun { display: none; }
+html.dark .theme-sun { display: block; }
+html.dark .theme-moon { display: none; }
+html.dark a[href="#main"]:focus {
+  background-color: #1f2937;
+  color: #f3f4f6;
+}
